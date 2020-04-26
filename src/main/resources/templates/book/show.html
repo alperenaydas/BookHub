@@ -7,52 +7,44 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link th:href="@{../../css/show.css}" rel="stylesheet" media="screen"/>
+	
 	<script src="https://kit.fontawesome.com/64716b42bb.js" crossorigin="anonymous"></script>
     <title>Bookhub-Book Details</title>
   </head>
 <body>
-<div class="container">
-<style type="text/css">
-.tg  {border:none;border-collapse:collapse;border-color:#9ABAD9;border-spacing:0;}
-.tg td{background-color:#EBF5FF;border-color:#9ABAD9;border-style:solid;border-width:0px;color:#444;
-  font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:7px 20px;word-break:normal;}
-.tg th{background-color:#409cff;border-color:#9ABAD9;border-style:solid;border-width:0px;color:#fff;
-  font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:7px 20px;word-break:normal;}
-.tg .tg-42j8{background-color:#D2E4FC;border-color:inherit;color:#000000;text-align:center;vertical-align:center}
-.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:center}
-.tg .tg-svo0{background-color:#D2E4FC;border-color:inherit;text-align:center;vertical-align:center}
-</style>
+<div class="container-fluid bg3">
+
 <table class="tg">
   <tr>
     <th class="tg-c3ow"><span style="font-weight:bold;color:rgb(239, 239, 239)">Book ID</span></th>
-	<td th:text="${book.id}"></td>
+	<td class="th" th:text="${book.id}"></td>
   </tr>
   <tr>
-    <td class="tg-svo0"><span style="font-weight:bold">Preview</span></td>
+    <th class="tg-c3ow"><span style="font-weight:bold;color:rgb(239, 239, 239)">Preview</span></th>
     <td class="tg-42j8"><img th:src=${book.imageUrl} width="150" height="204"></td>
-
   </tr>
 
   <tr>
-    <td class="tg-c3ow"><span style="font-weight:bold">Name</span></td>
-	<td th:text="${book.description}"></td> 
+    <th class="tg-c3ow"><span style="font-weight:bold;color:rgb(239, 239, 239)">Name</span></th>
+	<td class="th" th:text="${book.description}"></td> 
   <tr>
-    <td class="tg-svo0"><span style="font-weight:bold">Genre</span></td>
-	<td th:text="${book.genre}"></td>
+    <th class="tg-c3ow"><span style="font-weight:bold;color:rgb(239, 239, 239)">Genre</span></th>
+	<td class="th" th:text="${book.genre}"></td>
   </tr>
   <tr>
-    <td class="tg-c3ow"><span style="font-weight:bold">Author</span></td>
-	<td th:text="${book.author}"></td>
+    <th class="tg-c3ow"><span style="font-weight:bold;color:rgb(239, 239, 239)">Author</span></th>
+	<td class="th" th:text="${book.author}"></td>
   </tr>
   <tr>
-    <td class="tg-svo0"><span style="font-weight:bold">Price</span></td>
-	<td th:text="${book.price}"></td>
+     <th class="tg-c3ow"><span style="font-weight:bold;color:rgb(239, 239, 239)">Price</span></th>
+	<td class="th" th:text="${book.price}"></td>
   </tr>
 </table>
 <div class="row">
    <div class="col-sm-3">
 	<a class ="btn btn-primary" th:href="${'/book/edit/' + book.id}">Edit</a>   
-    <a href = "/book"><button type="button" class="btn btn-danger">Back</button></a>
+	<a class ="btn btn-danger" th:href="${'/book'}">Back</a>   
 </div>
 
 

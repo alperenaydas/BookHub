@@ -7,12 +7,15 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link th:href="@{../../css/listbooks.css}" rel="stylesheet" media="screen"/>
+	
+	
 	<script src="https://kit.fontawesome.com/64716b42bb.js" crossorigin="anonymous"></script>
     <title>Admin Panel- Book List!</title>
   </head>
   
 <body>
-<div class="container">
+<div class="container-fluid bg4">
 <div></div>
     <div th:if="${not #lists.isEmpty(books)}">
         <h2>Books on Sale</h2>
@@ -29,10 +32,10 @@
             </tr>
             <tr th:each="book : ${books}">
                 <td th:text="${book.id}"></td>
-                <td th:text="${book.description}"></td>
-				<td th:text="${book.genre}"></td>
-                <td th:text="${book.author}"></td>
-                <td th:text="${book.price}"></td>
+                <td class="th" th:text="${book.description}"></td>
+				<td class="th" th:text="${book.genre}"></td>
+                <td class="th" th:text="${book.author}"></td>
+                <td class="th" th:text="${book.price}"></td>
                 <td><a class ="btn btn-info" th:href="${'/book/show/' + book.id}">View</a> </td>
                 <td><a class ="btn btn-primary" th:href="${'/book/edit/' + book.id}">Edit</a> </td>
                 <td><a class ="btn btn-danger fas fa-trash-alt" th:href="${'/book/delete/' + book.id}"></a> </td>
