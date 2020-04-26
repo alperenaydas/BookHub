@@ -50,7 +50,6 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public Book saveOrUpdateBookForm(BookForm bookForm) {
 		Book savedBook = saveOrUpdate(bookFormToBook.convert(bookForm));
-
 		System.out.println("Saved Book Id: " + savedBook.getId());
 		return savedBook;
 	}

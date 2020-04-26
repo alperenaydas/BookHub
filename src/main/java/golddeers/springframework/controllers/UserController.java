@@ -37,7 +37,7 @@ public class UserController {
 	@RequestMapping("/login")
 	public String loginReq(Model model) {
 		model.addAttribute("loginForm", new LoginForm());
-		return "/general/login";
+		return "general/login";
 	}
 
 	@RequestMapping("/user/new")
@@ -86,14 +86,13 @@ public class UserController {
 
 				model.addAttribute("username", username);
 				return "/users/home";
-
 			} else {
-
-				return "/logininvalid";
+				return "/general/home";
 			}
 
 		} else {
-			return "redirect:/general/home";
+			model.addAttribute("loginerror", true);
+			return "/general/login";
 		}
 	}
 
