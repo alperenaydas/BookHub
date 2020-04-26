@@ -1,69 +1,57 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Book Details</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
-          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
-          rel="stylesheet" media="screen"/>
-
-    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
-            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
-
-    <link href="../../static/css/spring-core.css"
-          th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
-</head>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://kit.fontawesome.com/64716b42bb.js" crossorigin="anonymous"></script>
+    <title>Bookhub-Book Details</title>
+  </head>
 <body>
 <div class="container">
+<style type="text/css">
+.tg  {border:none;border-collapse:collapse;border-color:#9ABAD9;border-spacing:0;}
+.tg td{background-color:#EBF5FF;border-color:#9ABAD9;border-style:solid;border-width:0px;color:#444;
+  font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:7px 20px;word-break:normal;}
+.tg th{background-color:#409cff;border-color:#9ABAD9;border-style:solid;border-width:0px;color:#fff;
+  font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:7px 20px;word-break:normal;}
+.tg .tg-42j8{background-color:#D2E4FC;border-color:inherit;color:#000000;text-align:center;vertical-align:center}
+.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:center}
+.tg .tg-svo0{background-color:#D2E4FC;border-color:inherit;text-align:center;vertical-align:center}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-c3ow"><span style="font-weight:bold;color:rgb(239, 239, 239)">Book ID</span></th>
+	<td th:text="${book.id}"></td>  </tr>
+  </tr>
+  <tr>
+    <td class="tg-svo0"><span style="font-weight:bold">Preview</span></td>
+    <td class="tg-42j8"><img src=${book.image_url} width="150" height="204"></td>
+    
+  </tr>
 
-    <div class="row">
-        <div class="col-sm-6">
-            <h2>Show Book</h2>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-8">
-            <form class="form-horizontal">
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Book Id:</label>
-                    <div class="col-sm-10">
-                        <p class="form-control-static" th:text="${book.id}">Book Id</p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Name:</label>
-                    <div class="col-sm-10">
-                        <p class="form-control-static" th:text="${book.description}">Name</p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Author:</label>
-                    <div class="col-sm-10">
-                        <p class="form-control-static" th:text="${book.author}">Author</p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Genre:</label>
-                    <div class="col-sm-10">
-                        <p class="form-control-static" th:text="${book.genre}">Genre</p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Price:</label>
-                    <div class="col-sm-10">
-                        <p class="form-control-static" th:text="${book.price}">Price</p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 sm-2 control-label">Book :</label>
-                    	<a>
-                    		<img src="${book.imageUrl}" width="200" height="350">
-                    	</a>
-                </div>
-            </form>
-        </div>
-    </div>
+  <tr>
+    <td class="tg-c3ow"><span style="font-weight:bold">Name</span></td>
+	<td th:text="${book.description}"></td>  </tr>
+  <tr>
+    <td class="tg-svo0"><span style="font-weight:bold">Genre</span></td>
+	<td th:text="${book.genre}"></td>  </tr>
+  </tr>
+  <tr>
+    <td class="tg-c3ow"><span style="font-weight:bold">Author</span></td>
+	<td th:text="${book.author}"></td>  </tr>
+  </tr>
+  <tr>
+    <td class="tg-svo0"><span style="font-weight:bold">Price</span></td>
+	<td th:text="${book.price}"></td>  </tr>
+  </tr>
+</table>
+<div class="row">
+   <div class="col-sm-3">
+	<a class ="btn btn-primary" th:href="${'/book/edit/' + book.id}">Edit</a>   </div>
 </div>
 
 </body>
