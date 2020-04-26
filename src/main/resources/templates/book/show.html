@@ -25,33 +25,35 @@
 <table class="tg">
   <tr>
     <th class="tg-c3ow"><span style="font-weight:bold;color:rgb(239, 239, 239)">Book ID</span></th>
-	<td th:text="${book.id}"></td>  </tr>
+	<td th:text="${book.id}"></td>
   </tr>
   <tr>
     <td class="tg-svo0"><span style="font-weight:bold">Preview</span></td>
-    <td class="tg-42j8"><img src=${book.image_url} width="150" height="204"></td>
-    
+    <td class="tg-42j8"><img th:src=${book.imageUrl} width="150" height="204"></td>
+
   </tr>
 
   <tr>
     <td class="tg-c3ow"><span style="font-weight:bold">Name</span></td>
-	<td th:text="${book.description}"></td>  </tr>
+	<td th:text="${book.description}"></td> 
   <tr>
     <td class="tg-svo0"><span style="font-weight:bold">Genre</span></td>
-	<td th:text="${book.genre}"></td>  </tr>
+	<td th:text="${book.genre}"></td>
   </tr>
   <tr>
     <td class="tg-c3ow"><span style="font-weight:bold">Author</span></td>
-	<td th:text="${book.author}"></td>  </tr>
+	<td th:text="${book.author}"></td>
   </tr>
   <tr>
     <td class="tg-svo0"><span style="font-weight:bold">Price</span></td>
-	<td th:text="${book.price}"></td>  </tr>
+	<td th:text="${book.price}"></td>
   </tr>
 </table>
 <div class="row">
    <div class="col-sm-3">
-	<a class ="btn btn-primary" th:href="${'/book/edit/' + book.id}">Edit</a>   </div>
+	<a class ="btn btn-primary" th:href="${'/book/edit/' + book.id}">Edit</a>   
+	</div>
+</div>
 </div>
 
 </body>
