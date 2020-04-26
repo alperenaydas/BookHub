@@ -1,0 +1,89 @@
+.bg{
+    background: url('login_bg.jpg') no-repeat;
+    width: 100%;
+    height: 100vh;
+    background-size: 100%;
+}
+
+.form-horizontal{
+    background: rgba(255,255,255,.2);
+    position: absolute;
+    top: 50%;
+    margin-left: 37%;
+    width: 25%;
+    font-family: Raleway;
+    text-align: center;
+
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #000;
+
+}
+.form-horizontal h1{
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+
+}
+.form-horizontal input[type = "text"],.form-horizontal input[type="password"]{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #fff;
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+
+}
+.form-horizontal input[type = "text"]:focus,.form-horizontal input[type="password"]:focus{
+
+    width: 280px;
+    border-color: #feff7b;
+
+}
+.form-horizontal input[type = "submit"]{
+
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #feff7b;
+    padding: 14px 40px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+}
+.form-horizontal input[type = "submit"]:hover{
+    background: #feff7b ;
+
+}
+
+h2{
+    font-family: "Raleway ExtraBold";
+    color: #fffbaf;
+    font-size: 5rem;
+    text-transform: uppercase;
+    position: absolute;
+}
+p{
+    color: black;
+    font-family: Raleway;
+}
+button{
+    font-family: Raleway;
+    color: black;
+    background: rgba(255,255,255,.1);
+}
+img {
+    width: 150px;
+    -webkit-filter: drop-shadow(5px 5px 5px #222);
+    filter: drop-shadow(5px 5px 5px #222);
+}
