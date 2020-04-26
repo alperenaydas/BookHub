@@ -93,7 +93,6 @@ public class UserController {
 			}
 
 		} else {
-
 			return "redirect:/general/home";
 		}
 	}
