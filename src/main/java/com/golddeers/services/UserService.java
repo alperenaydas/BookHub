@@ -1,9 +1,9 @@
-package golddeers.springframework.services;
+package com.golddeers.services;
 
 import java.util.List;
 
-import golddeers.springframework.commands.UserForm;
-import golddeers.springframework.model.User;
+import com.golddeers.commands.UserForm;
+import com.golddeers.model.User;
 
 public interface UserService {
 

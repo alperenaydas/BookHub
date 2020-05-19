@@ -1,9 +1,9 @@
-package golddeers.springframework.services;
-
-import golddeers.springframework.commands.BookForm;
-import golddeers.springframework.model.Book;
+package com.golddeers.services;
 
 import java.util.List;
+
+import com.golddeers.commands.BookForm;
+import com.golddeers.model.Book;
 
 public interface BookService {
 

@@ -1,4 +1,4 @@
-package golddeers.springframework.controllers;
+package com.golddeers.controllers;
 
 import javax.validation.Valid;
 
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import golddeers.springframework.commands.BookForm;
-import golddeers.springframework.converters.BookToBookForm;
-import golddeers.springframework.model.Book;
-import golddeers.springframework.services.BookService;
+import com.golddeers.commands.BookForm;
+import com.golddeers.converters.BookToBookForm;
+import com.golddeers.model.Book;
+import com.golddeers.services.BookService;
 
 @Controller
 public class BookController {

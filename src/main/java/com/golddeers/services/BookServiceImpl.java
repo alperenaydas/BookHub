@@ -1,4 +1,4 @@
-package golddeers.springframework.services;
+package com.golddeers.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import golddeers.springframework.commands.BookForm;
-import golddeers.springframework.converters.BookFormToBook;
-import golddeers.springframework.model.Book;
-import golddeers.springframework.repositories.BookRepository;
+import com.golddeers.commands.BookForm;
+import com.golddeers.converters.BookFormToBook;
+import com.golddeers.model.Book;
+import com.golddeers.repositories.BookRepository;
 
 @Service
 public class BookServiceImpl implements BookService {

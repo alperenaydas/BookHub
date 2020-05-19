@@ -1,11 +1,11 @@
-package golddeers.springframework.converters;
+package com.golddeers.converters;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import golddeers.springframework.commands.UserForm;
-import golddeers.springframework.model.User;
+import com.golddeers.commands.UserForm;
+import com.golddeers.model.User;
 
 @Component
 public class UserFormToUser implements Converter<UserForm, User> {

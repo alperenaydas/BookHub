@@ -1,5 +1,5 @@
 *.class
-*.properties
+*.ucls
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
@@ -16,3 +16,4 @@ target
 # IDE files
 .idea
 *.iml
+*.project

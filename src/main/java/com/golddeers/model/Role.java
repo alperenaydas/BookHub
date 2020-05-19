@@ -1,4 +1,4 @@
-package golddeers.springframework.model;
+package com.golddeers.model;
 
 public enum Role {
 

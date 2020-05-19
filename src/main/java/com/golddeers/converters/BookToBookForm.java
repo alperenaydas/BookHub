@@ -1,10 +1,10 @@
-package golddeers.springframework.converters;
+package com.golddeers.converters;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import golddeers.springframework.commands.BookForm;
-import golddeers.springframework.model.Book;
+import com.golddeers.commands.BookForm;
+import com.golddeers.model.Book;
 
 @Component
 public class BookToBookForm implements Converter<Book, BookForm> {

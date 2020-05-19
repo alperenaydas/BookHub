@@ -1,8 +1,8 @@
-package golddeers.springframework.repositories;
+package com.golddeers.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 
-import golddeers.springframework.model.User;
+import com.golddeers.model.User;
 
 public interface UserRepository extends CrudRepository<User, String> {
 

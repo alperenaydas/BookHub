@@ -1,7 +1,8 @@
-package golddeers.springframework.repositories;
+package com.golddeers.repositories;
 
-import golddeers.springframework.model.Book;
 import org.springframework.data.repository.CrudRepository;
+
+import com.golddeers.model.Book;
 
 
 public interface BookRepository extends CrudRepository<Book, Long> {

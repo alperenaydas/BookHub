@@ -1,4 +1,4 @@
-package golddeers.springframework.services;
+package com.golddeers.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import golddeers.springframework.commands.UserForm;
-import golddeers.springframework.converters.UserFormToUser;
-import golddeers.springframework.model.User;
-import golddeers.springframework.repositories.UserRepository;
+import com.golddeers.commands.UserForm;
+import com.golddeers.converters.UserFormToUser;
+import com.golddeers.model.User;
+import com.golddeers.repositories.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {

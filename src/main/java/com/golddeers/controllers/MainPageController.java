@@ -1,4 +1,4 @@
-package golddeers.springframework.controllers;
+package com.golddeers.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

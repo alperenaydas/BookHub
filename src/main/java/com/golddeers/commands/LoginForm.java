@@ -1,4 +1,4 @@
-package golddeers.springframework.commands;
+package com.golddeers.commands;
 
 public class LoginForm {
 

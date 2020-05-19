@@ -1,4 +1,4 @@
-package golddeers.springframework.controllers;
+package com.golddeers.controllers;
 
 import javax.validation.Valid;
 
@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import golddeers.springframework.commands.LoginForm;
-import golddeers.springframework.commands.UserForm;
-import golddeers.springframework.converters.UserToUserForm;
-import golddeers.springframework.model.Role;
-import golddeers.springframework.model.User;
-import golddeers.springframework.services.UserService;
+import com.golddeers.commands.LoginForm;
+import com.golddeers.commands.UserForm;
+import com.golddeers.converters.UserToUserForm;
+import com.golddeers.model.Role;
+import com.golddeers.model.User;
+import com.golddeers.services.UserService;
 
 @Controller
 public class UserController {
