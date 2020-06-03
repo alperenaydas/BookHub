@@ -1,19 +1,13 @@
 package com.golddeers.controllers;
 
-import java.util.HashSet;
+import java.util.HashMap;
 
 public class Session {
 
-	public static HashSet<String> online = new HashSet<String>();
+	public static HashMap<String, String> online = new HashMap<String, String>();
 
-	public static boolean isOnline(String username) {
-
-		return online.contains(username);
-	}
-
-	public static void login(String username) {
-
-		online.add(username);
+	public static void login(String username, String role) {
+		online.put(username, role);
 	}
 
 	public static void logout(String username) {

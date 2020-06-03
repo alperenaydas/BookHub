@@ -36,6 +36,9 @@ public class UserController {
 
 	@RequestMapping("/login")
 	public String loginReq(Model model) {
+		if (!Session.online.isEmpty()) {
+			return "winter/index";
+		}
 		model.addAttribute("loginForm", new LoginForm());
 		return "general/login";
 	}
@@ -44,6 +47,14 @@ public class UserController {
 	public String newBook(Model model) {
 		model.addAttribute("userForm", new UserForm());
 		return "users/userform";
+	}
+
+	@RequestMapping("/logout")
+	public String logout() {
+		if (!Session.online.isEmpty()) {
+			Session.online.clear();
+		}
+		return "winter/index";
 	}
 
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
@@ -74,18 +85,21 @@ public class UserController {
 		String username = loginForm.getUsername();
 		String password = loginForm.getPassword();
 		User userFetched = userService.getById(username);
+		String userType = userFetched.getUserType();
 		System.err.println(username);
 		System.err.println(password);
 		if (userFetched != null && userFetched.getPassword().equals(password)) {
-
+			Session.login(username, userType);
+			System.out.println("login success");
 			if (Role.Admin == Role.getByName(userFetched.getUserType())) {
 
 				return "redirect:/book";
 
 			} else if (Role.Registered == Role.getByName(userFetched.getUserType())) {
 
-				model.addAttribute("username", username);
-				return "/users/home";
+				model.addAttribute("user_type", userFetched.getUserType());
+				model.addAttribute("usersOnline", Session.online);
+				return "/winter/index";
 			} else {
 				return "/general/home";
 			}

@@ -35,7 +35,13 @@ public class BookController {
 	@RequestMapping({ "/book/list", "/book" })
 	public String listBooks(Model model) {
 		model.addAttribute("books", bookService.listAll());
-		return "book/list";
+		if (Session.online.containsValue("registered") || Session.online.containsValue("Registered")) {
+			return "winter/index";
+		} else if (Session.online.containsValue("admin") || Session.online.containsValue("Admin")) {
+			return "book/list";
+		} else {
+			return "general/login";
+		}
 	}
 
 	@RequestMapping("/book/show/{id}")

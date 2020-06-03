@@ -9,7 +9,7 @@ public class MainPageController {
 
 	@RequestMapping({ "/", "/home" })
 	public String homePage(Model model) {
-
+		model.addAttribute("usersOnline", Session.online);
 		return "/winter/index";
 	}
 }
