@@ -10,6 +10,6 @@ public class MainPageController {
 	@RequestMapping({ "/", "/home" })
 	public String homePage(Model model) {
 
-		return "general/home";
+		return "/winter/index";
 	}
 }
