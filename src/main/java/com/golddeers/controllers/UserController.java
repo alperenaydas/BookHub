@@ -56,6 +56,12 @@ public class UserController {
 		}
 		return "winter/index";
 	}
+	@RequestMapping("/user/show/{username}")
+	public String getUser(@PathVariable String username, Model model) {
+		model.addAttribute("user", userService.getById(username));
+		return "users/single-user";
+	}
+
 
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	public String saveOrUpdateBook(@Valid UserForm userForm, BindingResult bindingResult) {
@@ -69,11 +75,11 @@ public class UserController {
 		return "redirect:/user/show/" + savedUser.getUsername();
 	}
 
-	@RequestMapping("/user/show/{id}")
+	/*@RequestMapping("/user/show/{id}")
 	public String getBook(@PathVariable String id, Model model) {
 		model.addAttribute("user", userService.getById(id));
 		return "users/show";
-	}
+	}*/
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@Valid LoginForm loginForm, BindingResult bindingResult, Model model) {

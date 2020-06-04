@@ -49,6 +49,13 @@ public class BookController {
 		model.addAttribute("book", bookService.getById(Long.valueOf(id)));
 		return "book/show";
 	}
+	
+	@RequestMapping("/book/details/{id}")
+	public String getBookDetails(@PathVariable String id, Model model) {
+		model.addAttribute("book", bookService.getById(Long.valueOf(id)));
+		return "book/single-product";
+	}
+	
 
 	@RequestMapping("book/edit/{id}")
 	public String edit(@PathVariable String id, Model model) {
