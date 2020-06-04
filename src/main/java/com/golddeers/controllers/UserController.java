@@ -56,6 +56,13 @@ public class UserController {
 		}
 		return "winter/index";
 	}
+	@RequestMapping("/cart")
+	public String myCart () {
+		
+		return "winter/index";
+	}
+	
+	
 	@RequestMapping("/user/show/{username}")
 	public String getUser(@PathVariable String username, Model model) {
 		model.addAttribute("user", userService.getById(username));
