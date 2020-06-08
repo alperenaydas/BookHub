@@ -35,7 +35,7 @@
 				<td class="th" th:text="${book.genre}"></td>
                 <td class="th" th:text="${book.author}"></td>
                 <td class="th" th:text="${book.price}"></td>
-                <td><a class ="btn btn-info" th:href="${'/book/show/' + book.id}">View</a> </td>
+                <td><a class ="btn btn-info" th:href="${'/book/details/' + book.id}">View</a> </td>
                 <td><a class ="btn btn-primary" th:href="${'/book/edit/' + book.id}">Edit</a> </td>
                 <td><a class ="btn btn-danger fas fa-trash-alt" th:href="${'/book/delete/' + book.id}"></a> </td>
             </tr>

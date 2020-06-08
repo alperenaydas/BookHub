@@ -70,16 +70,34 @@ public class UserController {
 	}
 
 
-	@RequestMapping(value = "/user", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/user", method = RequestMethod.POST)
 	public String saveOrUpdateBook(@Valid UserForm userForm, BindingResult bindingResult) {
 
 		if (bindingResult.hasErrors()) {
 			return "users/userform";
 		}
-
 		User savedUser = userService.saveOrUpdateUserForm(userForm);
 
 		return "redirect:/user/show/" + savedUser.getUsername();
+	}*/
+	
+	@RequestMapping(value = "/user", method = RequestMethod.POST)
+	public String saveOrUpdateBook(@Valid UserForm userForm, Model model) {
+		String username = userForm.getUsername();
+		String password = userForm.getPassword();
+		String confirmPassword = userForm.getConfirmPassword();
+		User userFetched = userService.getById(username);
+		if (userFetched == null) {				// User name not taken before
+			if (password.equals(confirmPassword)) {
+				Session.login(username, "registered");
+				model.addAttribute("usersOnline", Session.online);
+				model.addAttribute("user_type", "registered");
+				User savedUser = userService.saveOrUpdateUserForm(userForm);
+				return "/winter/index";
+			}
+			return "redirect:/user/new";
+		}
+		return "redirect:/user/new";
 	}
 
 	/*@RequestMapping("/user/show/{id}")

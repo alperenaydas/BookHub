@@ -8,6 +8,7 @@ public class UserForm {
 	private String address;
 	private String email;
 	private String userType;
+	private String confirmPassword;
 
 	public String getUsername() {
 
@@ -65,6 +66,14 @@ public class UserForm {
 
 	public void setUserType(String userType) {
 		this.userType = userType;
+	}
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 
 }
