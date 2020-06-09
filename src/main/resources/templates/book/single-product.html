@@ -152,6 +152,8 @@
           <div class="s_product_text">
             <h1 class="th" th:text="${book.description}"></h1>
             <h2 style="text-align:left;float:left;color:rgb(0,0,0)"class="th" th:text="${book.price}"></h2>
+
+
 			<h2 style="color:rgb(0,0,0)">$</h2>
 			<table class="tg">
 			  <tr>
@@ -185,7 +187,11 @@
                 <span class="number-increment"> <i class="ti-plus"></i></span>
               </div>
               <div class="add_to_cart">
-                  <a href="#" class="btn_3">add to cart</a>
+                 <!--<a href="/addBooktoCart/{" class="btn_3">add to cart</a> -->
+                <td><a class ="btn btn-info" th:href="${'/book/details/' + book.id}">View</a> </td>
+                <a class ="btn btn-info" th:href="${'/addBookToCart/' + book.id}">addToCart</a>
+
+
                   <a href="#" class="like_us"> <i class="ti-heart"></i> </a>
               </div>
               <div class="social_icon">
