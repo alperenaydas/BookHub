@@ -1,6 +1,7 @@
 package com.golddeers.controllers;
 
 import java.util.HashMap;
+import java.util.Properties;
 
 public class Session {
 
@@ -14,4 +15,6 @@ public class Session {
 
 		online.remove(username);
 	}
+
+	
 }
