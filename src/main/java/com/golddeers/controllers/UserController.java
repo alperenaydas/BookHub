@@ -86,6 +86,7 @@ public class UserController {
 		String username = userForm.getUsername();
 		String password = userForm.getPassword();
 		String confirmPassword = userForm.getConfirmPassword();
+		userForm.setUserType("registered");
 		User userFetched = userService.getById(username);
 		if (userFetched == null) {				// User name not taken before
 			if (password.equals(confirmPassword)) {
@@ -105,6 +106,17 @@ public class UserController {
 		model.addAttribute("user", userService.getById(id));
 		return "users/show";
 	}*/
+	
+	@RequestMapping("/userlist")
+	public String listUsers(Model model) {
+		model.addAttribute("users", userService.listAll());
+		if (Session.online.containsValue("admin") || Session.online.containsValue("Admin")) {
+			model.addAttribute("users", userService.listAll());
+			return "/admin/userlist";
+		} else {
+			return "/winter/index";
+		}
+	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@Valid LoginForm loginForm, BindingResult bindingResult, Model model) {
@@ -124,7 +136,7 @@ public class UserController {
 			System.out.println("login success");
 			if (Role.Admin == Role.getByName(userFetched.getUserType())) {
 
-				return "redirect:/book";
+				return "/admin/panel";
 
 			} else if (Role.Registered == Role.getByName(userFetched.getUserType())) {
 
