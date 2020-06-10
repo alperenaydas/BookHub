@@ -1,6 +1,7 @@
 package com.golddeers.controllers;
 
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -26,9 +27,9 @@ public class MailController {
 	}
 	
 	@RequestMapping(value = "/email", method = RequestMethod.POST)
-	public String sendEmail () {
+	public String sendEmail () throws MessagingException {
 		
-		com.golddeers.email.SendEmail.send();
+		com.golddeers.email.SendEmail.sendEmail("harunalperentoktas@gmail.com");
 
 		return "winter/email";
 	}
