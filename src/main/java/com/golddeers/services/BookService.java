@@ -7,15 +7,21 @@ import java.util.List;
 
 public interface BookService {
 
-    List<Book> listAll();
+	List<Book> listAll();
 
-    Book getById(Long id);
+	List<Book> findByDescriptionContaining(String description);
 
-    Book saveOrUpdate(Book book);
-    
-    void delete(Long id);
+	List<Book> findByAuthorIgnoreCaseContaining(String author);
 
-    Book saveOrUpdateBookForm(BookForm bookForm);
+	List<Book> findByGenreIgnoreCaseContaining(String genre);
+
+	Book getById(Long id);
+
+	Book saveOrUpdate(Book book);
+
+	void delete(Long id);
+
+	Book saveOrUpdateBookForm(BookForm bookForm);
 
 
 }

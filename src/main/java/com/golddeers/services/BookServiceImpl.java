@@ -44,7 +44,6 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public void delete(Long id) {
 		bookRepository.deleteById(id);
-
 	}
 
 	@Override
@@ -52,5 +51,23 @@ public class BookServiceImpl implements BookService {
 		Book savedBook = saveOrUpdate(bookFormToBook.convert(bookForm));
 		System.out.println("Saved Book Id: " + savedBook.getId());
 		return savedBook;
+	}
+
+	@Override
+	public List<Book> findByDescriptionContaining(String description) {
+
+		return bookRepository.findByDescriptionIgnoreCaseContaining(description);
+	}
+
+	@Override
+	public List<Book> findByAuthorIgnoreCaseContaining(String author) {
+
+		return bookRepository.findByAuthorIgnoreCaseContaining(author);
+	}
+
+	@Override
+	public List<Book> findByGenreIgnoreCaseContaining(String genre) {
+
+		return bookRepository.findByGenreIgnoreCaseContaining(genre);
 	}
 }
