@@ -19,6 +19,16 @@ public class Book {
     private String genre;
     private BigDecimal price;
     private String imageUrl;
+    private Integer quantity;
+
+    public int getQuantity() {
+        return quantity;
+    }
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+
 
     public Long getId() {
         return _id;
