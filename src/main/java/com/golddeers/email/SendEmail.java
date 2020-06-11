@@ -11,7 +11,7 @@ import javax.activation.*;
 
 public class SendEmail {
 
-   public static void sendEmail(String recepient) throws MessagingException {    
+   public static void sendEmail(ArrayList<String> recepients) throws MessagingException {    
 	   System.out.println("Prepare Message");
 	   Properties properties = new Properties();
       
@@ -30,18 +30,29 @@ public class SendEmail {
     	  }
       });
     	
-      Message message = prepareMessage(session,myAccountEmail,recepient);
+      Message message = prepareMessage(session,myAccountEmail,recepients);
       Transport.send(message);
       System.out.println("Message Sent Successfully");
     		  
    }
 
-   private static Message prepareMessage(Session session,String myAccountEmail,String recepient ) {
+   private static Message prepareMessage(Session session,String myAccountEmail,ArrayList<String> recepients ) {
 	   
 		   Message message = new MimeMessage(session);
 		   try {
+			
 			message.setFrom(new InternetAddress(myAccountEmail));
-			message.setRecipient(Message.RecipientType.TO,new InternetAddress(recepient));
+			String recipient = "harunalperentoktas@gmail.com,haruntoktas@hotmail.com";
+			String[] recipientList = recipient.split(",");
+			InternetAddress[] recipientAddress = new InternetAddress[recipientList.length];
+			int counter = 0;
+			for (String recipient1 : recipientList) {
+			    recipientAddress[counter] = new InternetAddress(recipient1.trim());
+			    counter++;
+			}
+			
+			message.setRecipients(Message.RecipientType.TO, recipientAddress);
+			//message.setRecipient(Message.RecipientType.TO,new InternetAddress(recepient));
 			message.setSubject("BookHub bilgilendirme Maili");
 			message.setText("Bu mesaj admin tarafindan,alayiniza gönderilmistir.");
 			return message;
