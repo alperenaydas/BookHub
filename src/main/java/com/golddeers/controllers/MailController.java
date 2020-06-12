@@ -14,6 +14,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.golddeers.services.UserService;
+import com.golddeers.commands.EmailForm;
+
 import com.golddeers.model.User;
 
 
@@ -30,25 +32,32 @@ public class MailController {
 	}
 
 	@RequestMapping({ "/email" })
-	public String sendEmailNavigate() {
+	public String sendEmailNavigate(Model model) {
 
-		//model.addAttribute("contactForm", new FeedbackForm());
+		model.addAttribute("emailForm", new EmailForm());
 		return "winter/email";
 	}
 	
 	@RequestMapping(value = "/email", method = RequestMethod.POST)
-	public String sendEmail () throws MessagingException {
+	public String sendEmail (Model model,EmailForm emailForm) throws MessagingException {
 		
-		ArrayList<String> Recepients = new ArrayList<>();
 		
+		String emails = "";
+		String message = emailForm.getMessage();
+		String subject = emailForm.getSubject();
 		List<User> Users = userService.listAll();
 		for (int i = 0; i < Users.size(); i++) {
-            Recepients.add(Users.get(i).getEmail());
-        }
+            
+            emails  = emails + Users.get(i).getEmail();
+            if(i != Users.size() - 1) {
+            	emails+= ",";
+            }
+		}
 		
-		com.golddeers.email.SendEmail.sendEmail(Recepients);
+		com.golddeers.email.SendEmail.sendEmail(emails,message,subject);
 
 		return "winter/email";
 	}
+	
 	
 }

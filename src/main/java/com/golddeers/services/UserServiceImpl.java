@@ -46,9 +46,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void delete(String id) {
+	public void delete(String username) {
 
-		userRepository.deleteById(id);
+		userRepository.deleteByUsername(username);
 	}
 
 	@Override
@@ -57,6 +57,12 @@ public class UserServiceImpl implements UserService {
 		User savedUser = saveOrUpdate(userFormToUser.convert(userForm));
 		System.out.println("Saved user: " + savedUser);
 		return savedUser;
+	}
+
+	@Override
+	public void delete(Long long1) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

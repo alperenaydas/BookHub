@@ -56,31 +56,29 @@ public class UserController {
 		}
 		return "winter/index";
 	}
+
 	@RequestMapping("/cart")
-	public String myCart () {
-		
+	public String myCart() {
+
 		return "winter/cart";
 	}
-	
-	
+
 	@RequestMapping("/user/show/{username}")
 	public String getUser(@PathVariable String username, Model model) {
 		model.addAttribute("user", userService.getById(username));
 		return "users/single-user";
 	}
 
+	/*
+	 * @RequestMapping(value = "/user", method = RequestMethod.POST) public String
+	 * saveOrUpdateBook(@Valid UserForm userForm, BindingResult bindingResult) {
+	 * 
+	 * if (bindingResult.hasErrors()) { return "users/userform"; } User savedUser =
+	 * userService.saveOrUpdateUserForm(userForm);
+	 * 
+	 * return "redirect:/user/show/" + savedUser.getUsername(); }
+	 */
 
-	/*@RequestMapping(value = "/user", method = RequestMethod.POST)
-	public String saveOrUpdateBook(@Valid UserForm userForm, BindingResult bindingResult) {
-
-		if (bindingResult.hasErrors()) {
-			return "users/userform";
-		}
-		User savedUser = userService.saveOrUpdateUserForm(userForm);
-
-		return "redirect:/user/show/" + savedUser.getUsername();
-	}*/
-	
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	public String saveOrUpdateBook(@Valid UserForm userForm, Model model) {
 		String username = userForm.getUsername();
@@ -88,7 +86,7 @@ public class UserController {
 		String confirmPassword = userForm.getConfirmPassword();
 		userForm.setUserType("registered");
 		User userFetched = userService.getById(username);
-		if (userFetched == null) {				// User name not taken before
+		if (userFetched == null) { // User name not taken before
 			if (password.equals(confirmPassword)) {
 				Session.login(username, "registered");
 				model.addAttribute("usersOnline", Session.online);
@@ -101,12 +99,12 @@ public class UserController {
 		return "redirect:/user/new";
 	}
 
-	/*@RequestMapping("/user/show/{id}")
-	public String getBook(@PathVariable String id, Model model) {
-		model.addAttribute("user", userService.getById(id));
-		return "users/show";
-	}*/
-	
+	/*
+	 * @RequestMapping("/user/show/{id}") public String getBook(@PathVariable String
+	 * id, Model model) { model.addAttribute("user", userService.getById(id));
+	 * return "users/show"; }
+	 */
+
 	@RequestMapping("/userlist")
 	public String listUsers(Model model) {
 		model.addAttribute("users", userService.listAll());
@@ -116,6 +114,11 @@ public class UserController {
 		} else {
 			return "/winter/index";
 		}
+	}
+	@RequestMapping("/user/delete/{username}")
+	public String delete(@PathVariable String username) {
+		userService.delete((username));
+		return "redirect:/userlist";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -142,6 +145,7 @@ public class UserController {
 
 				model.addAttribute("user_type", userFetched.getUserType());
 				model.addAttribute("usersOnline", Session.online);
+				model.addAttribute("username", username);
 				return "/winter/index";
 			} else {
 				return "/general/home";

@@ -13,7 +13,9 @@ public interface UserService {
 
 	User saveOrUpdate(User user);
 
-	void delete(String id);
+	void delete(Long long1);
+	
+	void delete(String username);
 
 	User saveOrUpdateUserForm(UserForm userForm);
 
