@@ -1,14 +1,11 @@
 package com.golddeers.controllers;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,71 +18,39 @@ public class SearchController {
 
 	private BookService bookService;
 
+	private static Set<Book> foundStaticBooks;
+
 	@Autowired
 	public void setBookService(BookService bookService) {
 
 		this.bookService = bookService;
 	}
 
-	public List<Book> getBooks(String searchString) {
+	@RequestMapping(value = "/filter", method = RequestMethod.POST)
+	public String filterByAuthor(@RequestParam(name = "authors_dropdown") String author,
+			@RequestParam(name = "genres_dropdown") String genre, Model model) {
 
-		return null;
-	}
+		Set<Book> retBooks = new HashSet<Book>();
+		Set<String> retGenre = new HashSet<String>();
+		Set<String> retAuthors = new HashSet<String>();
+		System.out.println(genre);
+		System.out.println(author);
 
-	public List<Book> filter(List<Book> books, String... filters) {
+		foundStaticBooks.forEach((book) -> {
 
-		return null;
-	}
+			if ((genre.equals("all") || book.getGenre().equals(genre))
+					&& (author.equals("all") || book.getAuthor().equals(author))) {
 
-	public List<Book> sort(List<Book> books, String sortOption) {
-
-		return null;
-	}
-
-	@RequestMapping(value = "/filterby/author/{authorname}/{searchkey}")
-	public String filterByAuthor(@PathVariable("searchkey") String searchkey, @PathVariable String authorname,
-			Model model) {
-
-		Set<Book> foundBooks = new HashSet<>();
-		Set<Book> ret = new HashSet<>();
-
-		foundBooks.addAll(bookService.findByDescriptionContaining(searchkey));
-		foundBooks.addAll(bookService.findByAuthorIgnoreCaseContaining(searchkey));
-		foundBooks.addAll(bookService.findByGenreIgnoreCaseContaining(searchkey));
-
-		foundBooks.forEach((book) -> {
-
-			if (book.getAuthor().equals(authorname) == true) {
-
-				ret.add(book);
+				retBooks.add(book);
 			}
-
+			retGenre.add(book.getGenre());
+			retAuthors.add(book.getAuthor());
 		});
 
-		model.addAttribute("books", ret);
-		return "/winter/list";
-	}
+		model.addAttribute("books", retBooks);
+		model.addAttribute("authors", retAuthors);
+		model.addAttribute("genres", retGenre);
 
-	@RequestMapping(value = "/filterby/genre/{genre}")
-	public String filterByGenre(@ModelAttribute("books") String searchkey, @PathVariable String genre, Model model) {
-
-		Set<Book> foundBooks = new HashSet<>();
-		Set<Book> ret = new HashSet<>();
-
-		foundBooks.addAll(bookService.findByDescriptionContaining(searchkey));
-		foundBooks.addAll(bookService.findByAuthorIgnoreCaseContaining(searchkey));
-		foundBooks.addAll(bookService.findByGenreIgnoreCaseContaining(searchkey));
-
-		foundBooks.forEach((book) -> {
-
-			if (book.getGenre().equals(genre) == true) {
-
-				ret.add(book);
-			}
-
-		});
-
-		model.addAttribute("books", ret);
 		return "/winter/list";
 	}
 
@@ -100,6 +65,7 @@ public class SearchController {
 		foundBooks.addAll(bookService.findByAuthorIgnoreCaseContaining(myid));
 		foundBooks.addAll(bookService.findByGenreIgnoreCaseContaining(myid));
 
+		foundStaticBooks = foundBooks;
 		foundBooks.forEach((book) -> {
 
 			foundAuthors.add(book.getAuthor());

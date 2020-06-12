@@ -12,7 +12,7 @@ public class BookWrapper {
 	}
 
 	public Set<Book> getBookList() {
-		return bookList;
+		return this.bookList;
 	}
 
 	public void setBookList(Set<Book> bookList) {

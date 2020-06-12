@@ -73,7 +73,6 @@
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
                                         <a class="dropdown-item" href="blog.html"> blog</a>
-                                        <a class="dropdown-item" href="single-blog.html" th:text="${usersOnline}"></a>
                                     </div>
                                 </li>
                                 
@@ -157,70 +156,22 @@
                                 <li class="nav-item">
                                     <a class="nav-link">Order By:</a>
                                 </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdown_1"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Title
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                        <a class="dropdown-item" href="category.html">Ascending</a>
-                                        <a class="dropdown-item" href="single-product.html">Descending</a>
-                                    </div>
-                                </li>
-                               
-                                
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle"  id="navbarDropdown_2"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Price
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                        <a class="dropdown-item" href="blog.html">Ascending</a>
-                                        <a class="dropdown-item" href="single-blog.html">Descending</a>
-                                    </div>
-                                </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link">Filter By: </a>
-                                </li>
+                                
                                  <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdown_3"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Genre
-                                    </a>
-                                     <form th:action="@{'/filterby/author/' + author}" th:object="{books}" method="post">
-										  <select id="cars" name="cars">
-										  <option th:each="author : ${authors}" th:value="${author}" th:text="${author}">
-										  
-										    </option>
-											
+                                     <form th:action="@{/filter}" th:object="${books}" method="post">
+										  <select id="author_dropdown" name="authors_dropdown">
+										   	<option th:value="all" >All</option>
+										  	<option th:each="author : ${authors}" th:value="${author}" th:text="${author}"></option>
 										  </select>
-										  <input type="submit" value="Submit">
+										  <select id="genre_dropdown" name="genres_dropdown">
+										  	<option th:value="all" >All</option>
+										  	<option th:each="genre : ${genres}" th:value="${genre}" th:text="${genre}"></option>
+										  </select>
+										  <input type="submit" value="Filter">
 									 </form> 
                                 </li>
-                                
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdown_3"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Author
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-								    	<a th:each="author : ${authors}">
-                							<a class="dropdown-item" th:href="${'/filterby/author/' + author + '/' + searchkey}" th:text="${author}"></a>
-            							</a>
-									</div>
-                                </li>
-                                
                             </ul>
-                        </div>
-                        <div class="hearer_icon d-flex">
-                            <div class="dropdown cart">
-                                <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="ti-bag"></i>
-                                </a>
-                            </div>
-                            <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
                         </div>
                     </nav>
         <table class="table table-bordered">
