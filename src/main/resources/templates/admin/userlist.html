@@ -26,6 +26,7 @@
 				<th>Email   </th>
                 <th>Type</th>
                 <th>More</th>
+                <th>Delete</th>
 
             </tr>
             <tr th:each="user : ${users}">
@@ -35,6 +36,8 @@
                 <td class="th" th:text="${user.email}"></td>
                 <td class="th" th:text="${user.userType}"></td>
                 <td><a class ="btn btn-info" th:href="${'/user/show/' + user.username}">View</a> </td>
+                <td><a class ="btn btn-danger fas fa-trash-alt" th:href="${'/user/delete/' + user.username}"></a> </td>
+                
             </tr>
         </table>
     </div>

@@ -115,6 +115,11 @@ public class UserController {
 			return "/winter/index";
 		}
 	}
+	@RequestMapping("/user/delete/{username}")
+	public String delete(@PathVariable String username) {
+		userService.delete((username));
+		return "redirect:/userlist";
+	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@Valid LoginForm loginForm, BindingResult bindingResult, Model model) {
