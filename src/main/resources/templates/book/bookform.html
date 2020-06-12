@@ -23,13 +23,12 @@
 <legend>Add New Book</legend>
 
 <!-- Text input-->
- <form class="form-horizontal" th:object="${bookForm}" th:action="@{/book}" method="post">
+<form class="form-horizontal" th:object="${bookForm}" th:action="@{/book}" method="post">
  
  <div class="form-group">
   <label class="col-md-4 control-label" for="Enter Book Name"></label>  
   <div class="col-md-4">
   <input type="hidden" class="form-control" th:field="*{id}" th:errorclass="has-error"/>
-    
   </div>
 </div>
 
@@ -80,11 +79,12 @@
   <div class="col-md-8">
       <div class="row">           
             <button type="submit" class="btn btn-success">Submit</button>
-            <a href = "/book"><button type="button" class="btn btn-danger">Cancel</button></a>
+            <a href = "/login"><button type="button" class="btn btn-danger">Cancel</button></a>
       </div>
 </div>
 
 </div>
 
+</form>
 </body>
 </html>

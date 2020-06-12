@@ -1,5 +1,4 @@
 package com.golddeers.model;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;

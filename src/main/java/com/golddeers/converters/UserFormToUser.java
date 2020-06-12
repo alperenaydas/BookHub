@@ -1,9 +1,7 @@
 package com.golddeers.converters;
-
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-
 import com.golddeers.commands.UserForm;
 import com.golddeers.model.User;
 

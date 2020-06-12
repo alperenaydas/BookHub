@@ -5,10 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
 import java.math.BigDecimal;
 
 
 @Entity
+@Table(name = "book")
 public class Book {
 
     @Id
@@ -27,9 +30,6 @@ public class Book {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-
-
-
     public Long getId() {
         return _id;
     }
@@ -77,5 +77,4 @@ public class Book {
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
-
 }

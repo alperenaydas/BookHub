@@ -13,7 +13,6 @@ import com.golddeers.repositories.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
-
 	private UserRepository userRepository;
 	private UserFormToUser userFormToUser;
 

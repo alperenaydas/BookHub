@@ -43,8 +43,10 @@
 					<span class="login100-form-title">
 						Member Login
 					</span>
-
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+					<div th:if="${loginerror}">
+						<a>Please enter valid username or password</a>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate= "Valid email is required: ex@abc.xyz">
 						<input class="input100" type="text" th:field="*{username}" placeholder="Username">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
