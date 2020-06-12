@@ -37,6 +37,9 @@ public class UserController {
 	@RequestMapping("/login")
 	public String loginReq(Model model) {
 		if (!Session.online.isEmpty()) {
+			if(Session.online.containsValue("admin")) {
+				return "/admin/panel";
+			}
 			return "winter/index";
 		}
 		model.addAttribute("loginForm", new LoginForm());
@@ -131,6 +134,11 @@ public class UserController {
 		String username = loginForm.getUsername();
 		String password = loginForm.getPassword();
 		User userFetched = userService.getById(username);
+
+		if(userFetched == null) {
+			model.addAttribute("loginerror", true);
+			return "/general/login";
+		}
 		String userType = userFetched.getUserType();
 		System.err.println(username);
 		System.err.println(password);
@@ -138,7 +146,6 @@ public class UserController {
 			Session.login(username, userType);
 			System.out.println("login success");
 			if (Role.Admin == Role.getByName(userFetched.getUserType())) {
-
 				return "/admin/panel";
 
 			} else if (Role.Registered == Role.getByName(userFetched.getUserType())) {
@@ -156,5 +163,4 @@ public class UserController {
 			return "/general/login";
 		}
 	}
-
 }

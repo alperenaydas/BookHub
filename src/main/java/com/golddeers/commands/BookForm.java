@@ -2,12 +2,15 @@ package com.golddeers.commands;
 
 import java.math.BigDecimal;
 
+import com.golddeers.model.Category;
+
 public class BookForm {
 
 	private Long id;
 	private String name;
 	private String author;
 	private String genre;
+	private Category category;
 	private BigDecimal price;
 	private String imageURL;
 
@@ -57,6 +60,14 @@ public class BookForm {
 
 	public void setImageURL(String imageURL) {
 		this.imageURL = imageURL;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 }
