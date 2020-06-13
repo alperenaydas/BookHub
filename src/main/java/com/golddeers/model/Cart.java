@@ -9,7 +9,6 @@ import javax.persistence.Id;
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     public Long fakeid;
     private Long bookid;
     private String username;

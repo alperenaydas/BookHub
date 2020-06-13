@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link th:href="@{../../css/listbooks.css}" rel="stylesheet" media="screen"/>
+	
+	<script src="https://kit.fontawesome.com/64716b42bb.js" crossorigin="anonymous"></script>
+    <title>Admin Panel- Book List</title>
+  </head>
+  
+<body>
+<div class="container-fluid bg4">
+<div></div>
+    <div th:if="${not #lists.isEmpty(payments)}">
+        <h2>Books on Sale</h2>
+        <table class="table table-bordered">
+            <tr>
+                <th>Payment ID     </th>
+                <th>Payment Owner</th>
+                <th>Payment Method</th>
+                <th>Payment Price</th>
+                <th>Payment Date</th>
+                <th>Payment Status</th>
+                <th>Confirm</th>
+            </tr>
+            <tr th:each="payment : ${payments}">
+                <td th:text="${payment.id}"></td>
+                <td th:text="${payment.username}"></td>
+                <td th:text="${payment.paymentMethod}"></td>
+                <td th:text="${payment.price}"></td>
+
+                <td th:text="${payment.time}"></td>
+                <td th:text="${payment.confirmed}"></td>
+                <td><a class ="btn btn-warning" th:href="${'/payment/confirm/' + payment.id}"></a> </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

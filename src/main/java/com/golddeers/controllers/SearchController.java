@@ -130,10 +130,15 @@ public class SearchController {
 		List<Category> genres = categoryService.listAll();
 		Set<String> retGenre = new HashSet<String>();
 		genres.forEach((category) -> retGenre.add(category.getName()));
-
-		foundBooks.addAll(bookService.findByDescriptionContaining(myid));
-		foundBooks.addAll(bookService.findByAuthorIgnoreCaseContaining(myid));
-		foundBooks.addAll(bookService.findByGenreIgnoreCaseContaining(myid));
+		
+		if(myid.equals("*")) {
+			foundBooks.addAll(bookService.listAll());
+		}
+		else {
+			foundBooks.addAll(bookService.findByDescriptionContaining(myid));
+			foundBooks.addAll(bookService.findByAuthorIgnoreCaseContaining(myid));
+			foundBooks.addAll(bookService.findByGenreIgnoreCaseContaining(myid));
+		}
 
 		foundStaticBooks = foundBooks;
 		foundBooks.forEach((book) -> {
