@@ -13,6 +13,8 @@ public class BookForm {
 	private Category category;
 	private BigDecimal price;
 	private String imageURL;
+	private int numberInStock;
+	private String details;
 
 	public Long getId() {
 		return id;
@@ -68,6 +70,22 @@ public class BookForm {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public int getNumberInStock() {
+		return numberInStock;
+	}
+
+	public void setNumberInStock(int numberInStock) {
+		this.numberInStock = numberInStock;
+	}
+
+	public String getDetails() {
+		return details;
+	}
+
+	public void setDetails(String details) {
+		this.details = details;
 	}
 
 }

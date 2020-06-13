@@ -16,7 +16,9 @@ public class BookToBookForm implements Converter<Book, BookForm> {
 		bookForm.setAuthor(book.getAuthor());
 		bookForm.setGenre(book.getGenre());
 		bookForm.setPrice(book.getPrice());
+		bookForm.setDetails(book.getDetails());
 		bookForm.setImageURL(book.getImageUrl());
+		bookForm.setNumberInStock(book.getNumberInStock());
 		return bookForm;
 	}
 }

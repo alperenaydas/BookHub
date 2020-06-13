@@ -57,6 +57,13 @@
   </div>
 </div>
 
+<div class="form-group">
+  <label class="required" for="genre">Enter Stock Number</label>  
+  <div class="col-md-4">
+  <input type="text" class="form-control" th:field="*{numberInStock}" th:errorclass="has-error"/>    
+  </div>
+</div>
+
 <!-- Text input-->
 <div class="form-group">
   <label class="required" for="Price">Price of the Book</label>  
@@ -70,6 +77,14 @@
   <label class="required" for="Image">Enter Image URL</label>  
   <div class="col-md-4">
   <input type="text" class="form-control" th:field="*{imageURL}" th:errorclass="has-error"/>    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="required" for="Image">Enter Book Description</label>  
+  <div class="col-md-4">
+  <input type="text" class="form-control" th:field="*{details}" th:errorclass="has-error"/>    
   </div>
 </div>
 

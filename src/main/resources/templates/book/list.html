@@ -24,6 +24,7 @@
                 <th>Name    </th>
                 <th>Genre   </th>
                 <th>Author  </th>
+                <th>Stock Status</th>
 				<th>Price   </th>
                 <th>List</th>
                 <th>Edit</th>
@@ -34,6 +35,7 @@
                 <td class="th" th:text="${book.description}"></td>
 				<td class="th" th:text="${book.genre}"></td>
                 <td class="th" th:text="${book.author}"></td>
+                <td class="th" th:text="${book.numberInStock}"></td>
                 <td class="th" th:text="${book.price}"></td>
                 <td><a class ="btn btn-info" th:href="${'/book/details/' + book.id}">View</a> </td>
                 <td><a class ="btn btn-primary" th:href="${'/book/edit/' + book.id}">Edit</a> </td>

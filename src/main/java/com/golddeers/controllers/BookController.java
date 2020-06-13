@@ -66,7 +66,7 @@ public class BookController {
 	        final BindingResult mapping1BindingResult,
 	        final Model model) {
 		model.addAttribute("book", bookService.getById(Long.valueOf(id)));
-		model.addAttribute("admin", mapping1FormObject);
+		model.addAttribute("admin", true);
 		return "book/single-product";
 	}
 	
@@ -96,8 +96,7 @@ public class BookController {
 
 		
 		String cat = bookForm.getGenre();
-		cat = cat.replaceAll("\\s+","");
-		String[] catNames = cat.split(",");
+		String[] catNames = cat.split(" ");
 		String newGenre = "";
 		for(String categoryCandidate: catNames) {
 			String name = categoryCandidate.substring(0, 1).toUpperCase() + categoryCandidate.substring(1).toLowerCase();
@@ -113,7 +112,7 @@ public class BookController {
 		bookForm.setGenre(newGenre);
 		Book savedBook = bookService.saveOrUpdateBookForm(bookForm);
 
-		redirectAttributes.addFlashAttribute("admin", mapping1);
+		redirectAttributes.addFlashAttribute("admin", true);
 		return "redirect:/book/details/" + savedBook.getId();
 	}
 

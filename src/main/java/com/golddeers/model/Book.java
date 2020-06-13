@@ -1,6 +1,7 @@
 package com.golddeers.model;
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,6 +24,9 @@ public class Book {
     private BigDecimal price;
     private String imageUrl;
     private Integer quantity;
+    private Integer numberInStock;
+	@Column(name = "details", columnDefinition = "VARCHAR(4096)")
+    private String details;
 
     public int getQuantity() {
         return quantity;
@@ -76,5 +80,17 @@ public class Book {
 
 	public void setGenre(String genre) {
 		this.genre = genre;
+	}
+	public int getNumberInStock() {
+		return numberInStock;
+	}
+	public void setNumberInStock(Integer numberInStock) {
+		this.numberInStock = numberInStock;
+	}
+	public String getDetails() {
+		return details;
+	}
+	public void setDetails(String details) {
+		this.details = details;
 	}
 }
