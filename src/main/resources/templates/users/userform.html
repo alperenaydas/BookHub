@@ -124,18 +124,28 @@
                         <div class="login_part_form_iner">
                             <h3> Don't have an account?</h3>
                             <form class="row contact_form"  th:object="${userForm}" th:action="@{/user}" method="post">
+								<div class="col-md-12 form-group p_star" th:if="${usernameError}">
+									<p style="text-align:center;font-family:arial;background-color:rgb(247, 47, 47);color:white;">Username taken before.</p>
+								</div>
                                 <div class="col-md-12 form-group p_star">
                                     <input type="text" class="form-control" th:field="*{username}" placeholder="Username">
                                 </div>
                                  <div class="col-md-12 form-group p_star">
                                     <input type="text" class="form-control" th:field="*{name}" placeholder="Name-Surname">
                                 </div>
+                                
+								<div class="col-md-12 form-group p_star" th:if="${passworderror}">
+									<p style="text-align:center;font-family:arial;background-color:rgb(247, 47, 47);color:white;">Passwords do not match.</p>
+								</div>
                                 <div class="col-md-12 form-group p_star">
                                     <input type="password" class="form-control" th:field="*{password}" placeholder="Password">
                                 </div>
                                 <div class="col-md-12 form-group p_star">
                                     <input type="password" class="form-control" th:field="*{confirmPassword}" placeholder="Confirm Password">
                                 </div>
+								<div class="col-md-12 form-group p_star" th:if="${emailError}">
+									<p style="text-align:center;font-family:arial;background-color:rgb(247, 47, 47);color:white;">Please enter a valid email address</p>
+								</div>
                                  <div class="col-md-12 form-group p_star">
                                     <input type="text" class="form-control" th:field="*{email}"placeholder="Email">
                                 </div>
@@ -143,10 +153,12 @@
                                     <input type="text" class="form-control" th:field="*{address}"placeholder="Address">
                                 </div>
                                 <div class="col-md-12 form-group">
+                                    <!--
                                     <div class="creat_account d-flex align-items-center">
                                         <input type="checkbox" id="f-option" name="selector">
                                         <label for="f-option">Remember me</label>
                                     </div>
+                                    -->
                                     <button type="submit" value="submit" class="btn_3">Sign up</button>
                                     <a href="/login">Already Have an Account? Login.</a>
                                 </div>

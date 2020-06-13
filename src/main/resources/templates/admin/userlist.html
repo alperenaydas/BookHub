@@ -37,10 +37,12 @@
                 <td class="th" th:text="${user.userType}"></td>
                 <td><a class ="btn btn-info" th:href="${'/user/show/' + user.username}">View</a> </td>
                 <td><a class ="btn btn-danger fas fa-trash-alt" th:href="${'/user/delete/' + user.username}"></a> </td>
-                
             </tr>
-        </table>
+        </table>        
     </div>
+	<td><a style="border-radius:4px"class="btn btn-warning" href="\login">Go Back To Admin Panel</a></td>
+	
+    
 </div>
 </body>
 </html>

@@ -91,15 +91,27 @@ public class UserController {
 		User userFetched = userService.getById(username);
 		if (userFetched == null) { // User name not taken before
 			if (password.equals(confirmPassword)) {
-				Session.login(username, "registered");
-				model.addAttribute("usersOnline", Session.online);
-				model.addAttribute("user_type", "registered");
-				User savedUser = userService.saveOrUpdateUserForm(userForm);
-				return "/winter/index";
+				String email = userForm.getEmail();
+				int indexof_at =  email.indexOf('@');
+				if(indexof_at == -1 || indexof_at== email.length()-1 || indexof_at == 0) { //Check email correctness
+					model.addAttribute("emailError", true);
+					return "users/userform";
+				}else {
+					Session.login(username, "registered");
+					model.addAttribute("usersOnline", Session.online);
+					model.addAttribute("user_type", "registered");
+					User savedUser = userService.saveOrUpdateUserForm(userForm);
+					return "/winter/index";
+				}
+
+			}else {
+				model.addAttribute("passworderror", true);		
+				return "users/userform";
 			}
-			return "redirect:/user/new";
+		}else {
+			model.addAttribute("usernameError", true);		
+			return "users/userform";
 		}
-		return "redirect:/user/new";
 	}
 
 	/*
@@ -136,12 +148,10 @@ public class UserController {
 		User userFetched = userService.getById(username);
 
 		if(userFetched == null) {
-			model.addAttribute("loginerror", true);
+			model.addAttribute("usernameError", true);
 			return "/general/login";
 		}
 		String userType = userFetched.getUserType();
-		System.err.println(username);
-		System.err.println(password);
 		if (userFetched != null && userFetched.getPassword().equals(password)) {
 			Session.login(username, userType);
 			System.out.println("login success");
@@ -159,7 +169,7 @@ public class UserController {
 			}
 
 		} else {
-			model.addAttribute("loginerror", true);
+			model.addAttribute("passwordError", true);
 			return "/general/login";
 		}
 	}
