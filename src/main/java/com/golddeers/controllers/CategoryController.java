@@ -31,7 +31,7 @@ public class CategoryController {
 	}
 	
 	@RequestMapping({ "/category/list", "/category" })
-	public String listBooks(Model model) {
+	public String listCategories(Model model) {
 		model.addAttribute("categories", categoryService.listAll());
 		if (Session.online.containsValue("registered") || Session.online.containsValue("Registered")) {
 			return "winter/index";

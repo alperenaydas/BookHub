@@ -6,19 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.golddeers.commands.BookForm;
+import com.golddeers.commands.CategoryForm;
 import com.golddeers.converters.BookToBookForm;
 import com.golddeers.model.Book;
+import com.golddeers.model.Category;
 import com.golddeers.services.BookService;
+import com.golddeers.services.CategoryService;
 
 @Controller
 public class BookController {
 
 	private BookService bookService;
+	private CategoryService categoryService;
 
 	private BookToBookForm bookToBookForm;
 
@@ -30,6 +36,11 @@ public class BookController {
 	@Autowired
 	public void setBookService(BookService bookService) {
 		this.bookService = bookService;
+	}
+	
+	@Autowired
+	public void setCategoryService(CategoryService categoryService) {
+		this.categoryService = categoryService;
 	}
 
 	@RequestMapping({ "/book/list", "/book" })
@@ -51,8 +62,11 @@ public class BookController {
 	}*/
 	
 	@RequestMapping("/book/details/{id}")
-	public String getBookDetails(@PathVariable String id, Model model) {
+	public String getBookDetails(@PathVariable String id, @ModelAttribute("mapping1Form") final Object mapping1FormObject,
+	        final BindingResult mapping1BindingResult,
+	        final Model model) {
 		model.addAttribute("book", bookService.getById(Long.valueOf(id)));
+		model.addAttribute("admin", mapping1FormObject);
 		return "book/single-product";
 	}
 	
@@ -73,14 +87,33 @@ public class BookController {
 	}
 
 	@RequestMapping(value = "/book", method = RequestMethod.POST)
-	public String saveOrUpdateBook(@Valid BookForm bookForm, BindingResult bindingResult) {
+	public String saveOrUpdateBook(@Valid BookForm bookForm, BindingResult bindingResult, @ModelAttribute("admin") final Object mapping1,final Model model
+, final RedirectAttributes redirectAttributes) {
 
 		if (bindingResult.hasErrors()) {
 			return "book/bookform";
 		}
 
+		
+		String cat = bookForm.getGenre();
+		cat = cat.replaceAll("\\s+","");
+		String[] catNames = cat.split(",");
+		String newGenre = "";
+		for(String categoryCandidate: catNames) {
+			String name = categoryCandidate.substring(0, 1).toUpperCase() + categoryCandidate.substring(1).toLowerCase();
+			Category fetched = categoryService.getByName(name);
+			if(fetched == null) { //Add this as new category
+				CategoryForm newCatForm = new CategoryForm();
+				newCatForm.setName(name);
+				Category savedCategory = categoryService.saveOrUpdateCategoryForm(newCatForm);
+			}
+			newGenre += name + " ";
+
+		}
+		bookForm.setGenre(newGenre);
 		Book savedBook = bookService.saveOrUpdateBookForm(bookForm);
 
+		redirectAttributes.addFlashAttribute("admin", mapping1);
 		return "redirect:/book/details/" + savedBook.getId();
 	}
 
