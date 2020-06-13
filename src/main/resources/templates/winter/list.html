@@ -153,17 +153,24 @@
 
                         <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                             <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link">Order By:</a>
-                                </li>
-
-                                
                                  <li class="nav-item dropdown">
                                      <form th:action="@{/filter}" th:object="${books}" method="post">
+										  <label for="sort_dropdown">Order by:</label>
+										  <select id="sort_dropdown" name="sort_dropdown">
+										   	<option th:value="none" >None</option>
+										  	<option th:value="pri_asc" >Price (Low)</option>
+										  	<option th:value="pri_desc" >Price (High)</option>
+										  	<option th:value="name_asc" >Name (Low)</option>
+										  	<option th:value="name_desc" >Name (High)</option>
+										  </select>
+										  
+										  <label for="author_dropdown">Filter by author:</label>
 										  <select id="author_dropdown" name="authors_dropdown">
 										   	<option th:value="all" >All</option>
 										  	<option th:each="author : ${authors}" th:value="${author}" th:text="${author}"></option>
 										  </select>
+										  
+										  <label for="genre_dropdown">Filter by genre:</label>
 										  <select id="genre_dropdown" name="genres_dropdown">
 										  	<option th:value="all" >All</option>
 										  	<option th:each="genre : ${genres}" th:value="${genre}" th:text="${genre}"></option>
