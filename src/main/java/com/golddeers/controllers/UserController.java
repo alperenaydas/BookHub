@@ -68,6 +68,17 @@ public class UserController {
 	public String myCart() {
 		return "winter/cart";
 	}
+	
+	@RequestMapping(value = "/edituser")
+	public String mySettings(Model model) {
+		String username = (String) Session.online.keySet().toArray()[0];
+		
+		User user = userService.getById(username);
+		UserForm userForm = userToUserForm.convert(user);
+		
+		model.addAttribute("userForm",userForm);
+		return "users/user-edit-user";
+	}
 
 	@RequestMapping("/user/show/{username}")
 	public String getUser(@PathVariable String username, Model model) {
@@ -98,9 +109,10 @@ public class UserController {
 	public String edit2(@Valid UserForm userForm, Model model) {
 
 		userService.delete(userForm.getUsername());
+		userForm.setPassword(ISecurePassword.createSecurePassword(userForm.getPassword()));
 		User savedUser = userService.saveOrUpdateUserForm(userForm);
 
-		return "/admin/panel";
+		return "/winter/index";
 	}
 
 	@RequestMapping(value = "/user", method = RequestMethod.POST)

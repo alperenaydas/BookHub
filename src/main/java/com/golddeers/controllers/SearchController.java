@@ -47,7 +47,6 @@ public class SearchController {
 
 		Set<Book> retBooks = new HashSet<Book>();
 		Set<String> retAuthors = new HashSet<String>();
-
 		List<Book> retList = new ArrayList<Book>();
 
 		List<Category> genres = categoryService.listAll();
@@ -59,8 +58,8 @@ public class SearchController {
 
 		foundStaticBooks.forEach((book) -> {
 
-			if ((genre.equals("all") || book.getGenre().equals(genre))
-					&& (author.equals("all") || book.getAuthor().equals(author))) {
+			if ((genre.equals("all") || book.getGenre().contains(genre))
+					&& (author.equals("all") || book.getAuthor().contains(author))) {
 
 				retBooks.add(book);
 			}
@@ -130,15 +129,39 @@ public class SearchController {
 		List<Category> genres = categoryService.listAll();
 		Set<String> retGenre = new HashSet<String>();
 		genres.forEach((category) -> retGenre.add(category.getName()));
-		
-		if(myid.equals("*")) {
+
+		if (myid.equals("*")) {
 			foundBooks.addAll(bookService.listAll());
-		}
-		else {
+		} else {
 			foundBooks.addAll(bookService.findByDescriptionContaining(myid));
 			foundBooks.addAll(bookService.findByAuthorIgnoreCaseContaining(myid));
 			foundBooks.addAll(bookService.findByGenreIgnoreCaseContaining(myid));
 		}
+
+		foundStaticBooks = foundBooks;
+		foundBooks.forEach((book) -> {
+
+			foundAuthors.add(book.getAuthor());
+
+		});
+
+		model.addAttribute("books", foundBooks);
+		model.addAttribute("genres", retGenre);
+		model.addAttribute("authors", foundAuthors);
+
+		return "/winter/list";
+	}
+
+	@RequestMapping(value = "/search")
+	public String listBooks(Model model) {
+
+		Set<Book> foundBooks = new HashSet<>();
+		Set<String> foundAuthors = new HashSet<>();
+		List<Category> genres = categoryService.listAll();
+		Set<String> retGenre = new HashSet<String>();
+		genres.forEach((category) -> retGenre.add(category.getName()));
+
+		foundBooks.addAll(bookService.listAll());
 
 		foundStaticBooks = foundBooks;
 		foundBooks.forEach((book) -> {
