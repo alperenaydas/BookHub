@@ -1,5 +1,8 @@
 package com.golddeers.controllers;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +20,12 @@ import com.golddeers.commands.CategoryForm;
 import com.golddeers.commands.LoginForm;
 import com.golddeers.commands.UserForm;
 import com.golddeers.converters.UserToUserForm;
+<<<<<<< HEAD
 import com.golddeers.model.Book;
 import com.golddeers.model.Category;
+=======
+import com.golddeers.encryption.ISecurePassword;
+>>>>>>> 643212cf35280b0c0e2200cb07aa97d859b2f75c
 import com.golddeers.model.Role;
 import com.golddeers.model.User;
 import com.golddeers.services.UserService;
@@ -43,7 +50,7 @@ public class UserController {
 	@RequestMapping("/login")
 	public String loginReq(Model model) {
 		if (!Session.online.isEmpty()) {
-			if(Session.online.containsValue("admin")) {
+			if (Session.online.containsValue("admin")) {
 				return "/admin/panel";
 			}
 			return "winter/index";
@@ -66,9 +73,8 @@ public class UserController {
 		return "winter/index";
 	}
 
-	@RequestMapping("/cart")
+	@RequestMapping(value = "/cart", method = RequestMethod.POST)
 	public String myCart() {
-
 		return "winter/cart";
 	}
 
@@ -115,27 +121,40 @@ public class UserController {
 		String confirmPassword = userForm.getConfirmPassword();
 		userForm.setUserType("registered");
 		User userFetched = userService.getById(username);
+
 		if (userFetched == null) { // User name not taken before
+
 			if (password.equals(confirmPassword)) {
+
 				String email = userForm.getEmail();
-				int indexof_at =  email.indexOf('@');
-				if(indexof_at == -1 || indexof_at== email.length()-1 || indexof_at == 0) { //Check email correctness
+				int indexof_at = email.indexOf('@');
+
+				if (indexof_at == -1 || indexof_at == email.length() - 1 || indexof_at == 0) { // Check email
+																								// correctness
+
 					model.addAttribute("emailError", true);
 					return "users/userform";
-				}else {
+
+				} else {
+
 					Session.login(username, "registered");
 					model.addAttribute("usersOnline", Session.online);
 					model.addAttribute("user_type", "registered");
+					userForm.setPassword(ISecurePassword.createSecurePassword(password));
+
 					User savedUser = userService.saveOrUpdateUserForm(userForm);
 					return "/winter/index";
 				}
 
-			}else {
-				model.addAttribute("passworderror", true);		
+			} else {
+
+				model.addAttribute("passworderror", true);
 				return "users/userform";
 			}
-		}else {
-			model.addAttribute("usernameError", true);		
+
+		} else {
+
+			model.addAttribute("usernameError", true);
 			return "users/userform";
 		}
 	}
@@ -161,6 +180,7 @@ public class UserController {
 			return "/winter/index";
 		}
 	}
+
 	@RequestMapping("/user/delete/{username}")
 	public String delete(@PathVariable String username) {
 		userService.delete((username));
@@ -178,28 +198,42 @@ public class UserController {
 		String password = loginForm.getPassword();
 		User userFetched = userService.getById(username);
 
-		if(userFetched == null) {
+		if (userFetched == null) {
 			model.addAttribute("usernameError", true);
 			return "/general/login";
 		}
 		String userType = userFetched.getUserType();
-		if (userFetched != null && userFetched.getPassword().equals(password)) {
-			Session.login(username, userType);
-			System.out.println("login success");
-			if (Role.Admin == Role.getByName(userFetched.getUserType())) {
-				return "/admin/panel";
 
-			} else if (Role.Registered == Role.getByName(userFetched.getUserType())) {
+		try {
+			if (userFetched != null && ISecurePassword.validateSecurePassword(password, userFetched.getPassword())) {
 
-				model.addAttribute("user_type", userFetched.getUserType());
-				model.addAttribute("usersOnline", Session.online);
-				model.addAttribute("username", username);
-				return "/winter/index";
+				Session.login(username, userType);
+				System.out.println("login success");
+				if (Role.Admin == Role.getByName(userFetched.getUserType())) {
+					return "/admin/panel";
+
+				} else if (Role.Registered == Role.getByName(userFetched.getUserType())) {
+
+					model.addAttribute("user_type", userFetched.getUserType());
+					model.addAttribute("usersOnline", Session.online);
+					model.addAttribute("username", username);
+					return "/winter/index";
+				} else {
+					return "/general/home";
+				}
+
 			} else {
-				return "/general/home";
+				model.addAttribute("passwordError", true);
+				return "/general/login";
 			}
-
-		} else {
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			model.addAttribute("passwordError", true);
+			return "/general/login";
+		} catch (InvalidKeySpecException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 			model.addAttribute("passwordError", true);
 			return "/general/login";
 		}
