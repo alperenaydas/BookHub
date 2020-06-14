@@ -1,6 +1,7 @@
 package com.golddeers.controllers;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,25 @@ public class PaymentController {
 	public String listPayments(Model model) {
 		List<Payment> payments = paymentService.listAll();
 		model.addAttribute("payments", payments);
-		return "/payment/list";
+		if (Session.online.containsKey("admin") || Session.online.containsKey("Admin")) {
+			model.addAttribute("admin", true);
+			return "/payment/list";
+		}
+		return "winter/index";
 	}
 
+	@RequestMapping("/paymentmethods")
+	public String listPaymentMethods(Model model) {
+		HashMap<String, String> methods = new HashMap();
+		methods.put("PayPal", "https://www.paypal.com/");
+		methods.put("Yapıkredi", "https://www.yapikredi.com.tr/");
+		methods.put("Cash", "");
+
+		if (Session.online.containsValue("registered")) {
+			model.addAttribute("registered", true);
+			model.addAttribute("paymentMethods", methods);
+			return "/payment/methods";
+		}
+		return "winter/index";
+	}
 }
