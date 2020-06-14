@@ -7,44 +7,52 @@ import javax.persistence.Id;
 
 @Entity
 public class Cart {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long fakeid;
-    private Long bookid;
-    private String username;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public Long fakeid;
+	private Long bookid;
+	private String username;
+	private Double totalprice = 0.00;
 
-    public Cart(Long bookid, String username) {
-        this.bookid = bookid;
-        this.username = username;
-    }
+	public Double getTotalprice() {
+		return totalprice;
+	}
 
-    public Cart() {
+	public void setTotalprice(Double totalprice) {
+		this.totalprice = totalprice;
+	}
 
-    }
+	public Cart(Long bookid, String username) {
+		this.bookid = bookid;
+		this.username = username;
+	}
 
+	public Cart() {
 
-    public Long getBookid() {
-        return bookid;
-    }
-    public void setbookid(Long bookid) {
-        this.bookid = bookid;
-    }
+	}
 
+	public Long getBookid() {
+		return bookid;
+	}
 
-    public String getUsername() {
-        return username;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	public void setbookid(Long bookid) {
+		this.bookid = bookid;
+	}
 
+	public String getUsername() {
+		return username;
+	}
 
-    public Long getFakeid() {
-        return fakeid;
-    }
-    public void setFakeid(Long fakeid) {
-        this.fakeid = fakeid;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public Long getFakeid() {
+		return fakeid;
+	}
+
+	public void setFakeid(Long fakeid) {
+		this.fakeid = fakeid;
+	}
 
 }
-
