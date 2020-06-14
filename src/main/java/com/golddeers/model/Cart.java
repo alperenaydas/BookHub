@@ -12,17 +12,6 @@ public class Cart {
     public Long fakeid;
     private Long bookid;
     private String username;
-    private Double totalprice = 0.00;
-
-    public Double getTotalprice() {
-        return totalprice;
-    }
-
-    public void setTotalprice(Double totalprice) {
-        this.totalprice = totalprice;
-    }
-
-
 
     public Cart(Long bookid, String username) {
         this.bookid = bookid;

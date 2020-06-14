@@ -25,7 +25,7 @@ import com.golddeers.model.Book;
 import com.golddeers.model.Category;
 =======
 import com.golddeers.encryption.ISecurePassword;
->>>>>>> 643212cf35280b0c0e2200cb07aa97d859b2f75c
+>>>>>>> e6c40a5d919cebbc3e3336059a8fa888f62f5e44
 import com.golddeers.model.Role;
 import com.golddeers.model.User;
 import com.golddeers.services.UserService;

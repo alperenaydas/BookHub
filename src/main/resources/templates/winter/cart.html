@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zxx" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="zxx">
 
 <head>
   <!-- Required meta tags -->
@@ -28,34 +28,6 @@
   <link rel="stylesheet" th:href="@{../../winter/css/price_rangs.css}">
   <!-- style CSS -->
   <link rel="stylesheet" th:href="@{../../winter/css/style.css}">
-
-    <!-- jquery plugins here-->
-    <script src="../../winter/js/jquery-1.12.1.min.js"></script>
-    <!-- popper js -->
-    <script src="../../winter/js/popper.min.js"></script>
-    <!-- bootstrap js -->
-    <script src="../../winter/js/bootstrap.min.js"></script>
-    <!-- easing js -->
-    <script src="../../winter/js/jquery.magnific-popup.js"></script>
-    <!-- swiper js -->
-    <script src="../../winter/js/swiper.min.js"></script>
-    <!-- swiper js -->
-    <script src="../../winter/js/mixitup.min.js"></script>
-    <script src="../../winter/js/price_rangs.js"></script>
-    <!-- particles js -->
-    <script src="../../winter/js/owl.carousel.min.js"></script>
-    <script src="../../winter/js/jquery.nice-select.min.js"></script>
-    <!-- slick js -->
-    <script src="../../winter/js/slick.min.js"></script>
-    <script src="../../winter/js/jquery.counterup.min.js"></script>
-    <script src="../../winter/js/waypoints.min.js"></script>
-    <script src="../../winter/js/contact.js"></script>
-    <script src="../../winter/js/jquery.ajaxchimp.min.js"></script>
-    <script src="../../winter/js/jquery.form.js"></script>
-    <script src="../../winter/js/jquery.validate.min.js"></script>
-    <script src="../../winter/js/mail-script.js"></script>
-    <!-- custom js -->
-    <script src="../../winter/js/custom.js"></script>
 </head>
 
 <body class="bg-white">
@@ -173,35 +145,19 @@
     <div class="container">
       <div class="cart_inner">
         <div class="table-responsive">
-            <div th:if="${not #lists.isEmpty(booksincart)}">
+            <div th:if="${not #lists.isEmpty(carts)}">
                 <h2>Books on Cart</h2>
-                <table class="table table-bordered" id="total">
+                <table class="table table-bordered">
                     <tr>
-                        <th>Name      </th>
-                        <th>Book Price</th>
+                        <th>Id      </th>
+                        <th>UserName    </th>
                         <th>Delete   </th>
                     </tr>
-                    <tr th:each="book : ${booksincart}">
-                        <td th:text="${book.description}"></td>
-                        <td class="price" th:text="${book.price}"></td>
-                        <td><a class ="btn btn-danger fas fa-trash-alt" th:href="${'/cart/delete/' + book.id}"></a> </td>
+                    <tr th:each="cart : ${carts}">
+                        <td th:text="${cart.bookid}"></td>
+                        <td class="th" th:text="${cart.username}"></td>
+                        <td><a class ="btn btn-danger fas fa-trash-alt" th:href="${'/cart/delete/' + cart.bookid}"></a> </td>
                     </tr>
-                    <script language="JavaScript" type="text/javascript">
-                    $(document).ready(function(){
-                        var sum_total = 0;
-                        var prices = document.getElementById('total').getElementsByTagName('td');
-                        for (var i = 0 ; i< prices.length ; i++){
-                            if(prices[i].className === 'price') {
-                                sum_total += isNaN(prices[i].innerHTML) ? 0 : parseFloat(prices[i].innerHTML);
-                            }
-                        }
-                        document.getElementById('total').innerHTML += '<tr><td></td><td>' +sum_total + '</td><td>total</td></tr>';
-
-
-
-
-                    })
-                    </script>
                 </table>
             </div>
           <div class="checkout_btn_inner float-right">
@@ -285,7 +241,33 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
   </footer>
   <!--::footer_part end::-->
 
-
+  <!-- jquery plugins here-->
+  <script src="../../winter/js/jquery-1.12.1.min.js"></script>
+  <!-- popper js -->
+  <script src="../../winter/js/popper.min.js"></script>
+  <!-- bootstrap js -->
+  <script src="../../winter/js/bootstrap.min.js"></script>
+  <!-- easing js -->
+  <script src="../../winter/js/jquery.magnific-popup.js"></script>
+  <!-- swiper js -->
+  <script src="../../winter/js/swiper.min.js"></script>
+  <!-- swiper js -->
+  <script src="../../winter/js/mixitup.min.js"></script>
+  <script src="../../winter/js/price_rangs.js"></script>
+  <!-- particles js -->
+  <script src="../../winter/js/owl.carousel.min.js"></script>
+  <script src="../../winter/js/jquery.nice-select.min.js"></script>
+  <!-- slick js -->
+  <script src="../../winter/js/slick.min.js"></script>
+  <script src="../../winter/js/jquery.counterup.min.js"></script>
+  <script src="../../winter/js/waypoints.min.js"></script>
+  <script src="../../winter/js/contact.js"></script>
+  <script src="../../winter/js/jquery.ajaxchimp.min.js"></script>
+  <script src="../../winter/js/jquery.form.js"></script>
+  <script src="../../winter/js/jquery.validate.min.js"></script>
+  <script src="../../winter/js/mail-script.js"></script>
+  <!-- custom js -->
+  <script src="../../winter/js/custom.js"></script>
 </body>
 
 </html>
