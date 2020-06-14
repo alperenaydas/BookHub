@@ -27,91 +27,140 @@
 
 <body class="bg-white">
    <!--::header part start::-->
-   <header class="main_menu home_menu">
-      <div class="container-fluid">
-          <div class="row align-items-center justify-content-center">
-              <div class="col-lg-11">
-                  <nav class="navbar navbar-expand-lg navbar-light">
-                      <a class="navbar-brand" href="../../"> <img src="../../winter/img/logo.png" alt="logo"> </a>
-                      <button class="navbar-toggler" type="button" data-toggle="collapse"
-                          data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                          aria-expanded="false" aria-label="Toggle navigation">
-                          <span class="menu_icon"><i class="fas fa-bars"></i></span>
-                      </button>
+    <header class="main_menu home_menu">
+        <div class="container-fluid">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-11">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <a class="navbar-brand" th:href="@{/home}"> <img src="../../winter/img/rsz_1reallogo.png" alt="logo"> </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="menu_icon"><i class="fas fa-bars"></i></span>
+                        </button>
 
-                      <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
-                          <ul class="navbar-nav">
-                              <li class="nav-item">
-                                  <a class="nav-link" href="../../">Main Page</a>
-                              </li>
-                             
-                              <li class="nav-item dropdown">
-                                  <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
-                                      role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      Account Management
-                                  </a>
-                                  <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                      
-                                      <a class="dropdown-item" href="tracking.html">Check Delivery Status</a>
-                                      <a class="dropdown-item" href="cart.html">View Shopping Cart</a>
-                                      
-                                  </div>
-                              </li>
-                              
-                            
-                              </li>
-                              
-                              
-                          </ul>
-                      </div>
-                      <div class="hearer_icon d-flex">
-                          <div class="dropdown cart">
-                              <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button"
-                                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  <i class="ti-bag"></i>
-                              </a>
-                              <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                  <div class="single_product">
-  
-                                  </div>
-                              </div> -->
-                          </div>
-                          <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
-                      </div>
-                  </nav>
-              </div>
-          </div>
-      </div>
-      <div class="search_input" id="search_input_box">
-          <div class="container ">
-              <form class="d-flex justify-content-between search-inner">
-                  <input type="text" class="form-control" id="search_input" placeholder="Search Here">
-                  <button type="submit" class="btn"></button>
-                  <span class="ti-close" id="close_search" title="Close Search"></span>
-              </form>
-          </div>
-      </div>
-  </header>
+                        <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="">Home</a>
+                                </li>
+								<div th:if="${usersOnline} and ${!usersOnline.isEmpty()} and ${usersOnline.get(usersOnline.keySet().toArray()[0])} == 'admin'">
+									<li class="nav-item">
+	                                    <a class="nav-link" href="/login">Admin Panel</a>
+	                                </li>
+	                            </div>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Shop
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+                                        <a class="dropdown-item" href="category.html"> shop category</a>
+                                        <a class="dropdown-item" href="single-product.html">product details</a>
+                                   
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_2"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <td th:text="${usersOnline} and ${!usersOnline.isEmpty()} ? 'Welcome ' + ${usersOnline.keySet().toArray()[0]} : 'Welcome'" /> 
+                                    </a>
+                                    <div th:if="${usersOnline} and ${!usersOnline.isEmpty()}">
+	                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
+	                                        <a class="dropdown-item" href="blog.html">Manage Account</a>
+	                                        <a class="dropdown-item" href="blog.html">View Orders</a>
+	                                        <a class="dropdown-item" href="/logout">Logout</a>
+	                                    </div>
+                                    </div>
+                                    <div th:unless="${usersOnline} and ${!usersOnline.isEmpty()}">
+                                  	  <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
+	                                        <a class="dropdown-item" href="login">Login</a>
+	                                        <a class="dropdown-item" href="/user/new">Sign Up</a>
+                                	    </div>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/contact">Feedback</a>
+                                </li>
+                                 <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Log In/Out
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
+                                        <a class="dropdown-item" href="login"> 
+                                            Login/Register
+                                       </a>
+                                        <a class="dropdown-item" href="/logout">logout</a>
+                                    </div>
+                                    </li>
+                                 <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        My Account
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
+                                        <a class="dropdown-item" href="cart"> My Cart    </a>
+                                        <a class="dropdown-item" href="checkout.html">My Orders</a>
+                                        <a class="dropdown-item" th:href="${'/edituser'}" >  My Settings</a>
+                                        
+                                        
+                                    </div>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div class="hearer_icon d-flex">
+                             <a id="cart" href="cart"><i class="ti-bag" href="cart"></i></a>
+                            <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="search_input" id="search_input_box">
+            <div class="container ">
+                <form class="d-flex justify-content-between search-inner" th:action="@{/search/}" method="post">
+                    <input name = "myid" type="text" class="form-control" id="search_input" placeholder="Search !!!">
+                    <button type="submit" class="btn"></button>
+                    <span class="ti-close" id="close_search" title="Close Search"></span>
+                </form>
+            </div>
+        </div>
+    </header>
     <!-- Header part end-->
 
 
   <!--================Single User Area =================-->
-  <div class="product_image_area section_padding">
+  <div class="product_image_area section_padding">  
     <div class="container">
-     
-        <div class="col-lg-6 offset-lg-1">
-          <div class="s_product_text">
-            <ul class="list">
-              <li>
-                <a class="passive" href="#"><span>Username</span><h5 class="form-control-static" th:text="${user.username}"></h5></a>
-                <a class="passive" href="#"><span>Name</span><h5 class="form-control-static" th:text="${user.name}"></h5></a>
-                <a class="passive" href="#"><span>Address</span><h5 class="form-control-static" th:text="${user.address}"></h5></a>
-                <a class="passive" href="#"><span>Email</span><h5 class="form-control-static" th:text="${user.email}"></h5></a>
-              </li>
+       <div class="row s_product_inner">
+        <div class="col-lg-5">
+          <div class="product_slider_img">
+            <div id="vertical">
+              <div data-thumb="../../img/product_details/prodect_details_1.png">
+			<img width="390" height="350" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTQ7NXEVowG5e3AIicvYGns0YZCVYCnJ2DtzcrPMzTbVuoQFyK6&usqp=CAU"></img>
+                
+              </div>
+            </div>
+          </div>
 
-            </ul>
-           
+        </div>
+        <div class="col-lg-6 offset-lg-1">
+        
+          <div class="s_product_text">
+          
+            <ul class="list">
             
+              <li>
+              
+                <a class="passive" ><b style="font-size:20px">Username</b><br><b style="font-size:20px;color:black"class="form-control-static" th:text="${user.username}"></b></a><br><br><br>
+                <a class="passive" ><b style="font-size:20px">Name</b><br><b style="font-size:20px;color:black"class="form-control-static" th:text="${user.name}"></b></a><br><br><br>
+                <a class="passive" ><b style="font-size:20px">Address</b><br><b style="font-size:20px;color:black"class="form-control-static" th:text="${user.address}"></b></a><br><br><br>
+                <a class="passive" ><b style="font-size:20px">Email</b><br><b style="font-size:20px;color:black"class="form-control-static" th:text="${user.email}"></b></a>
+              </li>
+              
+            </ul>
           </div>
         </div>
       </div>
@@ -122,36 +171,7 @@
   <!--::subscribe_area part end::-->
 
   <!--::footer_part start::-->
-  <footer class="footer_part">
-      <div class="container">
-          <div class="row justify-content-between">
-              
-              
-              <div class="col-sm-6 col-lg-6">
-                  <div class="single_footer_part">
-                      <h4>Address</h4>
-                      <ul class="list-unstyled">
-                          <li><p href="#">Beytepe, ANKARA</p></li>
-                          
-                          <li><p>buraya bir mail acalim send maildede onu kullanalım</p></li>
-                      </ul>
-                  </div>
-              </div>
-              <div class="col-sm-6 col-lg-4">
 
-              </div>
-          </div>
-          <div class="row justify-content-center">
-              <div class="col-lg-12">
-                  <div class="copyright_text">
-                      <P><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All Rights Reserved</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></P>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </footer>
   <!--::footer_part end::-->
 
   <!-- jquery plugins here-->
