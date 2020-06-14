@@ -11,7 +11,6 @@ public interface CartService {
 
 	void removeBook(Book book, Long id);
 
-	// Map<Book, Integer> getBooksInCart();
 	Cart getByBookId(Long bookid, String username);
 
 	BigDecimal getTotal();
