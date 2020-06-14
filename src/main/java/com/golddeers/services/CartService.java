@@ -14,6 +14,7 @@ public interface CartService {
     BigDecimal getTotal();
     void addBook(Book book);
     Cart saveOrUpdate(Cart cart);
-    void delete(Long id);
+    void delete(Long bookid);
+    List<Cart> findByUsernameContaining(Object username);
 
 }

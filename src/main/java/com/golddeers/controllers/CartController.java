@@ -53,7 +53,7 @@ public class CartController {
         if (Session.online.containsValue("admin") || Session.online.containsValue("Admin")) {
             return "/winter/index";
         } else {
-            model.addAttribute("carts", cartService.listAll());
+            model.addAttribute("carts", cartService.findByUsernameContaining(Session.online.keySet().toArray()[0]));
             model.addAttribute("sess", Session.online);
             System.out.println(cartService.listAll());
             return "/winter/cart";
@@ -62,9 +62,9 @@ public class CartController {
 
 
     }
-    @RequestMapping("/cart/delete/{id}")
-    public String delete(@PathVariable String id) {
-        cartService.delete(Long.valueOf(id));
+    @RequestMapping("/cart/delete/{bookid}")
+    public String delete(@PathVariable String bookid) {
+        cartService.delete(Long.valueOf(bookid));
         return "redirect:/cart";
     }
 

@@ -42,8 +42,8 @@ public class CartServiceImpl implements CartService {
 
     }
     @Override
-    public void delete(Long id) {
-        cartRepository.deleteById(id);
+    public void delete(Long bookid) {
+        cartRepository.deleteById(bookid);
     }
     @Override
     public List<Cart> listAll(){
@@ -51,5 +51,12 @@ public class CartServiceImpl implements CartService {
         cartRepository.findAll().forEach(carts::add);
         return carts;
     }
+    @Override
+    public List<Cart> findByUsernameContaining(Object username) {
+        return cartRepository.findByUsernameIgnoreCaseContaining(username);
+    }
+
+
+
 }
 
