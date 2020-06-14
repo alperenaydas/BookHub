@@ -20,12 +20,13 @@
         <h2>Accounts List</h2>
         <table class="table table-bordered">
             <tr>
-                <th>Username    </th>
+                <th>Username</th>
                 <th>Name   </th>
                 <th>Address  </th>
 				<th>Email   </th>
                 <th>Type</th>
                 <th>Inspect</th>
+                <th>Edit</th>
                 <th>Delete</th>
 
             </tr>
@@ -36,6 +37,7 @@
                 <td class="th" th:text="${user.email}"></td>
                 <td class="th" th:text="${user.userType}"></td>
                 <td><a class ="btn btn-info" th:href="${'/user/show/' + user.username}">View</a> </td>
+                <td><a class ="btn btn-info" th:href="${'/user/edit/' + user.username}">Edit</a> </td>
                 <td><a class ="btn btn-danger fas fa-trash-alt" th:href="${'/user/delete/' + user.username}"></a> </td>
             </tr>
         </table>        
