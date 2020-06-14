@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -38,6 +40,16 @@ public class CartServiceImpl implements CartService {
         cartRepository.save(cart);
         return cart;
 
+    }
+    @Override
+    public void delete(Long id) {
+        cartRepository.deleteById(id);
+    }
+    @Override
+    public List<Cart> listAll(){
+        List<Cart> carts = new ArrayList<>();
+        cartRepository.findAll().forEach(carts::add);
+        return carts;
     }
 }
 

@@ -60,9 +60,8 @@ public class UserController {
 		return "winter/index";
 	}
 
-	@RequestMapping("/cart")
+	@RequestMapping(value = "/cart",method = RequestMethod.POST)
 	public String myCart() {
-
 		return "winter/cart";
 	}
 
