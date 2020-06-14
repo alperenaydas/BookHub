@@ -9,14 +9,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.golddeers.commands.BookForm;
+import com.golddeers.commands.CategoryForm;
 import com.golddeers.commands.LoginForm;
 import com.golddeers.commands.UserForm;
 import com.golddeers.converters.UserToUserForm;
+<<<<<<< HEAD
+import com.golddeers.model.Book;
+import com.golddeers.model.Category;
+=======
 import com.golddeers.encryption.ISecurePassword;
+>>>>>>> e6c40a5d919cebbc3e3336059a8fa888f62f5e44
 import com.golddeers.model.Role;
 import com.golddeers.model.User;
 import com.golddeers.services.UserService;
@@ -74,6 +83,18 @@ public class UserController {
 		model.addAttribute("user", userService.getById(username));
 		return "users/single-user";
 	}
+	@RequestMapping("user/edit/{username}")
+	public String edit(@PathVariable String username, Model model) {
+		
+		
+		
+		User user = userService.getById(username);
+		UserForm userForm = userToUserForm.convert(user);
+		
+
+		model.addAttribute("userForm", userForm);
+		return "users/admin-edit-user";
+	}
 
 	/*
 	 * @RequestMapping(value = "/user", method = RequestMethod.POST) public String
@@ -84,9 +105,17 @@ public class UserController {
 	 * 
 	 * return "redirect:/user/show/" + savedUser.getUsername(); }
 	 */
+	@RequestMapping(value = "/useredit", method = RequestMethod.POST)
+	public String edit2(@Valid UserForm userForm, Model model) {
 
+		userService.delete(userForm.getUsername());
+		User savedUser = userService.saveOrUpdateUserForm(userForm);
+		
+		
+		return "/admin/panel";
+	}
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
-	public String saveOrUpdateBook(@Valid UserForm userForm, Model model) {
+	public String saveOrUpdateUser(@Valid UserForm userForm, Model model) {
 		String username = userForm.getUsername();
 		String password = userForm.getPassword();
 		String confirmPassword = userForm.getConfirmPassword();
@@ -129,6 +158,11 @@ public class UserController {
 			return "users/userform";
 		}
 	}
+	
+	
+	
+	
+	
 
 	/*
 	 * @RequestMapping("/user/show/{id}") public String getBook(@PathVariable String

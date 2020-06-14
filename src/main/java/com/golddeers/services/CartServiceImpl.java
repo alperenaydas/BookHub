@@ -2,7 +2,6 @@ package com.golddeers.services;
 
 import com.golddeers.model.Book;
 import com.golddeers.model.Cart;
-import com.golddeers.repositories.BookRepository;
 import com.golddeers.repositories.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,8 +42,8 @@ public class CartServiceImpl implements CartService {
 
     }
     @Override
-    public void delete(Long fakeid) {
-        cartRepository.deleteById(fakeid);
+    public void delete(Long bookid) {
+        cartRepository.deleteById(bookid);
     }
     @Override
     public List<Cart> listAll(){
@@ -55,25 +54,6 @@ public class CartServiceImpl implements CartService {
     @Override
     public List<Cart> findByUsernameContaining(Object username) {
         return cartRepository.findByUsernameIgnoreCaseContaining(username);
-    }
-    @Override
-    public Cart getByBookId(Long bookid, String username){
-        for(Cart cart:cartRepository.findAll()){
-
-
-            System.out.println(username);
-            System.out.println(cart.getUsername());
-            System.out.println("SASASASAASSA");
-            System.out.println(cart.getBookid());
-            System.out.println(bookid);
-            if(cart.getUsername().equals(username) && cart.getBookid().equals(bookid)){
-
-                return cart;
-            }
-
-
-        }
-        return null;
     }
 
 

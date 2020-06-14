@@ -2,7 +2,7 @@
 .banner_part{
     position: relative;
     background-color: #dde5e8;
-    @include background ('../img/banner_img.png');
+    @include background ('../img/banner_img.png56');
     .single_banner_slider{
         .banner_text{
             display: table;
@@ -19,7 +19,7 @@
                 height: 650px;
             }
             h5{
-                font-size: 24px;
+                font-size: 2	4px;
                 letter-spacing: 2px;
                 @media #{$tab}{
                     font-size: 18px;

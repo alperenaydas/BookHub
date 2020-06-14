@@ -36,6 +36,10 @@ public class UserServiceImpl implements UserService {
 
 		return userRepository.findById(id).orElse(null);
 	}
+	@Override
+	public User getByUsername(String username) {
+		return userRepository.getByUsername(username);
+	}
 
 	@Override
 	public User saveOrUpdate(User user) {
@@ -63,5 +67,7 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }

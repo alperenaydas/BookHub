@@ -10,6 +10,8 @@ public interface UserService {
 	List<User> listAll();
 
 	User getById(String id);
+	
+	User getByUsername(String username);
 
 	User saveOrUpdate(User user);
 
@@ -18,5 +20,7 @@ public interface UserService {
 	void delete(String username);
 
 	User saveOrUpdateUserForm(UserForm userForm);
+	
+	
 
 }

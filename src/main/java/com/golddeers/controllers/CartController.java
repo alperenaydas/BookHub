@@ -1,6 +1,5 @@
 package com.golddeers.controllers;
 
-import com.golddeers.model.Book;
 import com.golddeers.model.Cart;
 import com.golddeers.repositories.CartRepository;
 import com.golddeers.services.BookService;
@@ -11,9 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Controller
@@ -53,17 +49,13 @@ public class CartController {
 
     }
     @RequestMapping("/cart") //we have errors when we write like this: ("/cart")
-    public String listBooks(Model model){
+    public String listBooks(Model model, Session session){
         if (Session.online.containsValue("admin") || Session.online.containsValue("Admin")) {
             return "/winter/index";
         } else {
             model.addAttribute("carts", cartService.findByUsernameContaining(Session.online.keySet().toArray()[0]));
-            List<Book> booksincart = new ArrayList<>();
-            for (Cart cart:cartService.findByUsernameContaining(Session.online.keySet().toArray()[0])) {
-                booksincart.add(bookService.getById(cart.getBookid()));
-            }
-
-                model.addAttribute("booksincart", booksincart);
+            model.addAttribute("sess", Session.online);
+            System.out.println(cartService.listAll());
             return "/winter/cart";
         }
 
@@ -72,9 +64,7 @@ public class CartController {
     }
     @RequestMapping("/cart/delete/{bookid}")
     public String delete(@PathVariable String bookid) {
-        String username = (String) Session.online.keySet().toArray()[0];
-
-        cartService.delete(cartService.getByBookId(Long.valueOf(bookid), username).getFakeid());
+        cartService.delete(Long.valueOf(bookid));
         return "redirect:/cart";
     }
 
