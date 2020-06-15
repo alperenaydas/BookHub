@@ -134,7 +134,7 @@
           <div class="product_slider_img">
             <div id="vertical">
               <div data-thumb="../../img/product_details/prodect_details_1.png">
-                <img th:src=${book.imageUrl} width="501" height="350">
+                <img th:src=${book.imageUrl} width="300" height="350">
               </div>
             </div>
           </div>
@@ -188,7 +188,7 @@
               </div>
             <div class="add_to_cart">
                 <td><a class ="btn btn-info" th:href="${'/book/details/' + book.id}">View</a> </td>
-                <a class ="btn btn-info" th:href="${'/addBookToCart/' + book.id}">addToCart</a>
+                <a class ="btn btn-info" th:href="${'/addBookToCart/' + book.id}">Add to Cart</a>
           	</div>
         </div>
       </div>

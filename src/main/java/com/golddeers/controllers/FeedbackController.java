@@ -16,6 +16,20 @@ public class FeedbackController {
 	@RequestMapping(value = "/contact")
 	public String sendFeedbackForm(Model model) {
 
+		if (Session.online.isEmpty() == false) {
+
+			if (Session.online.containsValue("admin")) {
+
+				model.addAttribute("admin", true);
+				model.addAttribute("user_type", "admin");
+			} else {
+				model.addAttribute("admin", false);
+				model.addAttribute("user_type", "registered");
+			}
+			model.addAttribute("usersOnline", Session.online);
+			model.addAttribute("username", Session.online.keySet().toArray()[0]);
+
+		}
 		return "winter/contact";
 	}
 
@@ -23,6 +37,21 @@ public class FeedbackController {
 	public String leaveFeedback(@RequestParam(name = "message") String message,
 			@RequestParam(name = "email") String email, @RequestParam(name = "subject") String subject,
 			@RequestParam(name = "name") String name, Model model) {
+
+		if (Session.online.isEmpty() == false) {
+
+			if (Session.online.containsValue("admin")) {
+
+				model.addAttribute("admin", true);
+				model.addAttribute("user_type", "admin");
+			} else {
+				model.addAttribute("admin", false);
+				model.addAttribute("user_type", "registered");
+			}
+			model.addAttribute("usersOnline", Session.online);
+			model.addAttribute("username", Session.online.keySet().toArray()[0]);
+
+		}
 
 		try {
 

@@ -118,6 +118,20 @@ public class SearchController {
 		model.addAttribute("authors", retAuthors);
 		model.addAttribute("genres", retGenre);
 
+		if (Session.online.isEmpty() == false) {
+
+			if (Session.online.containsValue("admin")) {
+
+				model.addAttribute("admin", true);
+				model.addAttribute("user_type", "admin");
+			} else {
+				model.addAttribute("admin", false);
+				model.addAttribute("user_type", "registered");
+			}
+			model.addAttribute("usersOnline", Session.online);
+			model.addAttribute("username", Session.online.keySet().toArray()[0]);
+
+		}
 		return "/winter/list";
 	}
 
@@ -149,6 +163,21 @@ public class SearchController {
 		model.addAttribute("genres", retGenre);
 		model.addAttribute("authors", foundAuthors);
 
+		if (Session.online.isEmpty() == false) {
+
+			if (Session.online.containsValue("admin")) {
+
+				model.addAttribute("admin", true);
+				model.addAttribute("user_type", "admin");
+			} else {
+				model.addAttribute("admin", false);
+				model.addAttribute("user_type", "registered");
+			}
+			model.addAttribute("usersOnline", Session.online);
+			model.addAttribute("username", Session.online.keySet().toArray()[0]);
+
+		}
+
 		return "/winter/list";
 	}
 
@@ -173,7 +202,20 @@ public class SearchController {
 		model.addAttribute("books", foundBooks);
 		model.addAttribute("genres", retGenre);
 		model.addAttribute("authors", foundAuthors);
+		if (Session.online.isEmpty() == false) {
 
+			if (Session.online.containsValue("admin")) {
+
+				model.addAttribute("admin", true);
+				model.addAttribute("user_type", "admin");
+			} else {
+				model.addAttribute("admin", false);
+				model.addAttribute("user_type", "registered");
+			}
+			model.addAttribute("usersOnline", Session.online);
+			model.addAttribute("username", Session.online.keySet().toArray()[0]);
+
+		}
 		return "/winter/list";
 	}
 
@@ -199,7 +241,20 @@ public class SearchController {
 		model.addAttribute("books", foundBooks);
 		model.addAttribute("genres", retGenre);
 		model.addAttribute("authors", foundAuthors);
+		if (Session.online.isEmpty() == false) {
 
+			if (Session.online.containsValue("admin")) {
+
+				model.addAttribute("admin", true);
+				model.addAttribute("user_type", "admin");
+			} else {
+				model.addAttribute("admin", false);
+				model.addAttribute("user_type", "registered");
+			}
+			model.addAttribute("usersOnline", Session.online);
+			model.addAttribute("username", Session.online.keySet().toArray()[0]);
+
+		}
 		return "/winter/list";
 	}
 

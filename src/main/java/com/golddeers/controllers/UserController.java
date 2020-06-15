@@ -41,31 +41,68 @@ public class UserController {
 	@RequestMapping(value = "/ads")
 	public String showads(Model model) {
 		model.addAttribute("background", 1);
-		
+		if (!Session.online.isEmpty()) {
+
+			model.addAttribute("usersOnline", Session.online);
+		}
+		if (Session.online.isEmpty() == false) {
+
+			if (Session.online.containsValue("admin")) {
+
+				model.addAttribute("admin", true);
+				model.addAttribute("user_type", "admin");
+			} else {
+				model.addAttribute("admin", false);
+				model.addAttribute("user_type", "registered");
+			}
+			model.addAttribute("usersOnline", Session.online);
+			model.addAttribute("username", Session.online.keySet().toArray()[0]);
+
+		}
 		return "winter/index";
 	}
 
 	@RequestMapping("/login")
 	public String loginReq(Model model) {
+
+		System.out.println(Session.online.keySet());
 		if (!Session.online.isEmpty()) {
+
 			String username = (String) Session.online.keySet().toArray()[0];
 
 			if (Session.online.containsValue("admin")) {
+
 				model.addAttribute("admin", true);
 				model.addAttribute("usersOnline", Session.online);
 				model.addAttribute("username", username);
 				return "/admin/panel";
 			}
+
+			if (!Session.online.isEmpty()) {
+
+				model.addAttribute("usersOnline", Session.online);
+			}
+
 			return "winter/index";
 		}
 		model.addAttribute("loginForm", new LoginForm());
+
 		return "general/login";
 	}
 
 	@RequestMapping("/user/new")
 	public String newBook(Model model) {
+		
 		model.addAttribute("userForm", new UserForm());
+
+		if (!Session.online.isEmpty()) {
+
+			model.addAttribute("usersOnline", Session.online);
+			return "winter/index";
+		}
+		
 		return "users/userform";
+
 	}
 
 	@RequestMapping("/logout")
@@ -73,12 +110,27 @@ public class UserController {
 		if (!Session.online.isEmpty()) {
 			Session.online.clear();
 		}
+
 		return "winter/index";
 	}
 
 	@RequestMapping(value = "/cart", method = RequestMethod.POST)
-	public String myCart() {
-		return "winter/cart";
+	public String myCart(Model model) {
+
+		if (!Session.online.isEmpty() && !Session.online.containsValue("admin")) {
+
+			model.addAttribute("usersOnline", Session.online);
+			return "winter/cart";
+		} else if (!Session.online.isEmpty()) {
+
+			model.addAttribute("admin", true);
+			model.addAttribute("usersOnline", Session.online);
+			model.addAttribute("username", Session.online.keySet().toArray()[0]);
+			return "/admin/panel";
+		}
+
+		return "redirect:/login";
+
 	}
 
 	@RequestMapping(value = "/edituser")
@@ -89,12 +141,50 @@ public class UserController {
 		UserForm userForm = userToUserForm.convert(user);
 
 		model.addAttribute("userForm", userForm);
+
+		if (!Session.online.isEmpty()) {
+
+			model.addAttribute("usersOnline", Session.online);
+		}
+		if (Session.online.isEmpty() == false) {
+
+			if (Session.online.containsValue("admin")) {
+
+				model.addAttribute("admin", true);
+				model.addAttribute("user_type", "admin");
+			} else {
+				model.addAttribute("admin", false);
+				model.addAttribute("user_type", "registered");
+			}
+			model.addAttribute("usersOnline", Session.online);
+			model.addAttribute("username", Session.online.keySet().toArray()[0]);
+
+		}
 		return "users/user-edit-user";
 	}
 
 	@RequestMapping("/user/show/{username}")
 	public String getUser(@PathVariable String username, Model model) {
 		model.addAttribute("user", userService.getById(username));
+
+		if (!Session.online.isEmpty()) {
+
+			model.addAttribute("usersOnline", Session.online);
+		}
+		if (Session.online.isEmpty() == false) {
+
+			if (Session.online.containsValue("admin")) {
+
+				model.addAttribute("admin", true);
+				model.addAttribute("user_type", "admin");
+			} else {
+				model.addAttribute("admin", false);
+				model.addAttribute("user_type", "registered");
+			}
+			model.addAttribute("usersOnline", Session.online);
+			model.addAttribute("username", Session.online.keySet().toArray()[0]);
+
+		}
 		return "users/single-user";
 	}
 
@@ -123,7 +213,28 @@ public class UserController {
 		userService.delete(userForm.getUsername());
 		userForm.setPassword(ISecurePassword.createSecurePassword(userForm.getPassword()));
 		User savedUser = userService.saveOrUpdateUserForm(userForm);
+		if (Session.online.containsValue("admin")) {
 
+			model.addAttribute("admin", true);
+			model.addAttribute("usersOnline", Session.online);
+			model.addAttribute("username", Session.online.keySet().toArray()[0]);
+			return "/admin/panel";
+		}
+
+		if (Session.online.isEmpty() == false) {
+
+			if (Session.online.containsValue("admin")) {
+
+				model.addAttribute("admin", true);
+				model.addAttribute("user_type", "admin");
+			} else {
+				model.addAttribute("admin", false);
+				model.addAttribute("user_type", "registered");
+			}
+			model.addAttribute("usersOnline", Session.online);
+			model.addAttribute("username", Session.online.keySet().toArray()[0]);
+
+		}
 		return "/winter/index";
 	}
 

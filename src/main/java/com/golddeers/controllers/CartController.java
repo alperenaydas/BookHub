@@ -34,6 +34,20 @@ public class CartController {
 
 	@RequestMapping("/addBookToCart/{id}")
 	public String addBookToCart(@PathVariable String id, Model model) {
+		if (Session.online.isEmpty() == false) {
+
+			if (Session.online.containsValue("admin")) {
+
+				model.addAttribute("admin", true);
+				model.addAttribute("user_type", "admin");
+			} else {
+				model.addAttribute("admin", false);
+				model.addAttribute("user_type", "registered");
+			}
+			model.addAttribute("usersOnline", Session.online);
+			model.addAttribute("username", Session.online.keySet().toArray()[0]);
+
+		}
 		model.addAttribute("book", bookService.getById(Long.valueOf(id)));
 		String username = (String) Session.online.keySet().toArray()[0];
 		// if(model.addAttribute("cart")==null){
@@ -54,6 +68,20 @@ public class CartController {
 
 	@RequestMapping("/cart") // we have errors when we write like this: ("/cart")
 	public String listBooks(Model model) {
+		if (Session.online.isEmpty() == false) {
+
+			if (Session.online.containsValue("admin")) {
+
+				model.addAttribute("admin", true);
+				model.addAttribute("user_type", "admin");
+			} else {
+				model.addAttribute("admin", false);
+				model.addAttribute("user_type", "registered");
+			}
+			model.addAttribute("usersOnline", Session.online);
+			model.addAttribute("username", Session.online.keySet().toArray()[0]);
+
+		}
 		if (Session.online.containsValue("admin") || Session.online.containsValue("Admin")) {
 			return "/winter/index";
 		} else {
@@ -72,9 +100,23 @@ public class CartController {
 	}
 
 	@RequestMapping("/cart/delete/{bookid}")
-	public String delete(@PathVariable String bookid) {
+	public String delete(@PathVariable String bookid, Model model) {
 		String username = (String) Session.online.keySet().toArray()[0];
 
+		if (Session.online.isEmpty() == false) {
+
+			if (Session.online.containsValue("admin")) {
+
+				model.addAttribute("admin", true);
+				model.addAttribute("user_type", "admin");
+			} else {
+				model.addAttribute("admin", false);
+				model.addAttribute("user_type", "registered");
+			}
+			model.addAttribute("usersOnline", Session.online);
+			model.addAttribute("username", Session.online.keySet().toArray()[0]);
+
+		}
 		cartService.delete(cartService.getByBookId(Long.valueOf(bookid), username).getFakeid());
 		return "redirect:/cart";
 	}

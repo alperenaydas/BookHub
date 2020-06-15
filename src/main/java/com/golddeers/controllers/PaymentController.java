@@ -41,6 +41,20 @@ public class PaymentController {
 
 	@RequestMapping("/payments")
 	public String listPayments(Model model) {
+		if (Session.online.isEmpty() == false) {
+
+			if (Session.online.containsValue("admin")) {
+
+				model.addAttribute("admin", true);
+				model.addAttribute("user_type", "admin");
+			} else {
+				model.addAttribute("admin", false);
+				model.addAttribute("user_type", "registered");
+			}
+			model.addAttribute("usersOnline", Session.online);
+			model.addAttribute("username", Session.online.keySet().toArray()[0]);
+
+		}
 		List<Payment> payments = paymentService.listAll();
 		model.addAttribute("payments", payments);
 		if (Session.online.containsKey("admin") || Session.online.containsKey("Admin")) {
@@ -62,6 +76,20 @@ public class PaymentController {
 			model.addAttribute("paymentMethods", methods);
 			model.addAttribute("username", Session.online.keySet().toArray()[0]);
 			return "/payment/methods";
+		}
+		if (Session.online.isEmpty() == false) {
+
+			if (Session.online.containsValue("admin")) {
+
+				model.addAttribute("admin", true);
+				model.addAttribute("user_type", "admin");
+			} else {
+				model.addAttribute("admin", false);
+				model.addAttribute("user_type", "registered");
+			}
+			model.addAttribute("usersOnline", Session.online);
+			model.addAttribute("username", Session.online.keySet().toArray()[0]);
+
 		}
 		return "winter/index";
 	}
