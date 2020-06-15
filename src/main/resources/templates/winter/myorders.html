@@ -1,32 +1,64 @@
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>winter</title>
-    <link rel="icon" href="../../winter/img/favicon.png">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" th:href="@{../../winter/css/bootstrap.min.css}">
-    <!-- animate CSS -->
-    <link rel="stylesheet" th:href="@{../../winter/css/animate.css}">
-    <!-- owl carousel CSS -->
-    <link rel="stylesheet" th:href="@{../../winter/css/owl.carousel.min.css}">
-    <!-- font awesome CSS -->
-    <link rel="stylesheet" th:href="@{../../winter/css/all.css}">
-    <link rel="stylesheet" th:href="@{../../winter/css/nice-select.css}">
-    <!-- flaticon CSS -->
-    <link rel="stylesheet" th:href="@{../../winter/css/flaticon.css}">
-    <link rel="stylesheet" th:href="@{../../winter/css/themify-icons.css}">
-    <!-- font awesome CSS -->
-    <link rel="stylesheet" th:href="@{../../winter/css/magnific-popup.css}">
-    <!-- swiper CSS -->
-    <link rel="stylesheet" th:href="@{../../winter/css/slick.css}">
-    <!-- swiper CSS -->
-    <link rel="stylesheet" th:href="@{../../winter/css/price_rangs.css}">
-    <!-- style CSS -->
-    <link rel="stylesheet" th:href="@{../../winter/css/style.css}">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>winter</title>
+  <link rel="icon" th:href="@{../../winter/img/favicon.png}">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" th:href="@{../../winter/css/bootstrap.min.css}">
+  <!-- animate CSS -->
+  <link rel="stylesheet" th:href="@{../../winter/css/animate.css}">
+  <!-- owl carousel CSS -->
+  <link rel="stylesheet" th:href="@{../../winter/css/owl.carousel.min.css}">
+  <!-- font awesome CSS -->
+  <link rel="stylesheet" th:href="@{../../winter/css/all.css}">
+  <link rel="stylesheet" th:href="@{../../winter/css/nice-select.css}">
+  <!-- flaticon CSS -->
+  <link rel="stylesheet" th:href="@{../../winter/css/flaticon.css}">
+  <link rel="stylesheet" th:href="@{../../winter/css/themify-icons.css}">
+  <!-- font awesome CSS -->
+  <link rel="stylesheet" th:href="@{../../winter/css/magnific-popup.css}">
+  <!-- swiper CSS -->
+  <link rel="stylesheet" th:href="@{../../winter/css/slick.css}">
+  <!-- swiper CSS -->
+  <link rel="stylesheet" th:href="@{../../winter/css/price_rangs.css}">
+  <!-- style CSS -->
+  <link rel="stylesheet" th:href="@{../../winter/css/style.css}">
 </head>
+
 <body class="bg-white">
-    <!--::header part start::-->
+
+  <!-- jquery plugins here-->
+  <!-- jquery -->
+  <script src="../../winter/js/jquery-1.12.1.min.js"></script>
+  <!-- popper js -->
+  <script src="../../winter/js/popper.min.js"></script>
+  <!-- bootstrap js -->
+  <script src="../../winter/js/bootstrap.min.js"></script>
+  <!-- easing js -->
+  <script src="../../winter/js/jquery.magnific-popup.js"></script>
+  <!-- swiper js -->
+  <script src="../../winter/js/swiper.min.js"></script>
+  <!-- swiper js -->
+  
+  <!-- particles js -->
+  <script src="../../winter/js/owl.carousel.min.js"></script>
+  <script src="../../winter/js/jquery.nice-select.min.js"></script>
+  <!-- slick js -->
+  <script src="../../winter/js/slick.min.js"></script>
+  <script src="../../winter/js/jquery.counterup.min.js"></script>
+  <script src="../../winter/js/waypoints.min.js"></script>
+  <script src="../../winter/js/contact.js"></script>
+  <script src="../../winter/js/jquery.ajaxchimp.min.js"></script>
+  <script src="../../winter/js/jquery.form.js"></script>
+  <script src="../../winter/js/jquery.validate.min.js"></script>
+  <script src="../../winter/js/mail-script.js"></script>
+  <script src="../../winter/js/stellar.js"></script>
+  <script src="../../winter/js/price_rangs.js"></script>
+  <!-- custom js -->
+  <script src="../../winter/js/custom.js"></script>
+  
+  <!--::header part start::-->
     <header class="main_menu home_menu">
         <div class="container-fluid">
             <div class="row align-items-center justify-content-center">
@@ -128,107 +160,51 @@
             </div>
         </div>
     </header>
-    <!-- Header part end-->
-    
-    <!--================Home Banner Area =================-->
+  <!-- Header part end-->
 
-    <!--================login_part Area =================-->
-    <section class="login_part section_padding">
-       
-                <div class="col-lg-6 col-md-6">
-                    <div class="login_part_form">
-                        <div class="login_part_form_iner">
-                            <h3> Please enter the corresponding fields.</h3>
-                            <form class="row contact_form"  th:object="${userForm}" th:action="@{/user}" method="post">
-								<div class="col-md-12 form-group p_star" th:if="${usernameError}">
-									<p style="text-align:center;font-family:arial;background-color:rgb(247, 47, 47);color:white;">Username taken before.</p>
-								</div>
-								<div class="col-md-12 form-group p_star" th:if="${adminUsernameError}">
-									<p style="text-align:center;font-family:arial;background-color:rgb(247, 47, 47);color:white;">Another user uses this username</p>
-								</div>
-                                 
-                                 <div class="col-md-12 form-group p_star">
-                                 	
-                                    <input type="hidden" class="form-control" th:field="*{userType}" readonly>
-                                </div>
-                                
-                                <div class="col-md-12 form-group p_star">
-                                    
-                                    <input type="text" class="form-control" th:field="*{username}" placeholder="Username">
-                                
-                                </div>
-                                 <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control" th:field="*{name}" placeholder="Name-Surname">
-                                </div>
-                               
-								<div class="col-md-12 form-group p_star" th:if="${passworderror}">
-									<p style="text-align:center;font-family:arial;background-color:rgb(247, 47, 47);color:white;">Passwords do not match.</p>
-								</div>
-                                <div class="col-md-12 form-group p_star">
-                                    <input type="password" class="form-control" th:field="*{password}" placeholder="Password">
-                                </div>
-                                 <div class="col-md-12 form-group p_star">
-                                    <input type="password" class="form-control" th:field="*{confirmPassword}" placeholder="Confirm Password">
-                                </div>
-                                
-								<div class="col-md-12 form-group p_star" th:if="${emailError}">
-									<p style="text-align:center;font-family:arial;background-color:rgb(247, 47, 47);color:white;">Please enter a valid email address</p>
-								</div>
-                                 <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control" th:field="*{email}"placeholder="Email">
-                                </div>
-                                 <div class="col-md-12 form-group p_star">
-                                    <input type="text" class="form-control" th:field="*{address}"placeholder="Address">
-                                </div>
-                                <div class="col-md-12 form-group">
-                                    <!--
-                                    <div class="creat_account d-flex align-items-center">
-                                        <input type="checkbox" id="f-option" name="selector">
-                                        <label for="f-option">Remember me</label>
-                                    </div>
-                                    -->
-                                    <button type="submit" value="submit" class="btn_3">Submit</button>
-                                    
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <!--================ confirmation part start =================-->
+  <section class="confirmation_part section_padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="order_details_iner">
+            <h2>Select Order ID</h2>
+            <table class="table table-borderless" id="xx">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+              <tr th:each="order : ${orders}">              
+				<td><a style="width: 180px; height: 40px;"class="genric-btn info radius somethinh" th:text="${order.fakeid}" target="_blank" th:href="${'/orderDetails/' + order.fakeid}" rel="nofollow"></a> </td>
+              </tr>
+              <a class="wtf" th:text=${username}></a>
+              </tbody>
+            </table>
+          </div>
         </div>
-    </section>
-    <!--================login_part end =================-->
+      </div>
+    </div>
+  </section>
+  <!--================ confirmation part end =================-->
 
+  <!-- subscribe_area part start-->
 
-    <!-- jquery plugins here-->
-    <!-- jquery -->
-    <script src="../../winter/js/jquery-1.12.1.min.js"></script>
-    <!-- popper js -->
-    <script src="../../winter/js/popper.min.js"></script>
-    <!-- bootstrap js -->
-    <script src="../../winter/js/bootstrap.min.js"></script>
-    <!-- easing js -->
-    <script src="../../winter/js/jquery.magnific-popup.js"></script>
-    <!-- swiper js -->
-    <script src="../../winter/js/swiper.min.js"></script>
-    <!-- swiper js -->
-    
-    <!-- particles js -->
-    <script src="../../winter/js/owl.carousel.min.js"></script>
-    <script src="../../winter/js/jquery.nice-select.min.js"></script>
-    <!-- slick js -->
-    <script src="../../winter/js/slick.min.js"></script>
-    <script src="../../winter/js/jquery.counterup.min.js"></script>
-    <script src="../../winter/js/waypoints.min.js"></script>
-    <script src="../../winter/js/contact.js"></script>
-    <script src="../../winter/js/jquery.ajaxchimp.min.js"></script>
-    <script src="../../winter/js/jquery.form.js"></script>
-    <script src="../../winter/js/jquery.validate.min.js"></script>
-    <script src="../../winter/js/mail-script.js"></script>
-    <script src="../../winter/js/stellar.js"></script>
-    <script src="../../winter/js/price_rangs.js"></script>
-    <!-- custom js -->
-    <script src="../../winter/js/custom.js"></script>
+<!--::subscribe_area part end::-->
+
+<!--::footer_part end::-->
+
 </body>
+
+</html>
+
+</html>
+
+</html>
+
+</html>
+
+</html>
 
 </html>

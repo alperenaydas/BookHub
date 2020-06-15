@@ -92,7 +92,7 @@ public class UserController {
 
 	@RequestMapping("/user/new")
 	public String newBook(Model model) {
-		
+
 		model.addAttribute("userForm", new UserForm());
 
 		if (!Session.online.isEmpty()) {
@@ -100,7 +100,7 @@ public class UserController {
 			model.addAttribute("usersOnline", Session.online);
 			return "winter/index";
 		}
-		
+
 		return "users/userform";
 
 	}

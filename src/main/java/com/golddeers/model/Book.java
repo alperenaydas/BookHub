@@ -34,6 +34,7 @@ public class Book {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+    
     public Long getId() {
         return _id;
     }
