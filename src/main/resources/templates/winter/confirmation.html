@@ -1,29 +1,29 @@
-<head>
+	<head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>winter</title>
-  <link rel="icon" href="img/favicon.png">
+  <link rel="icon" th:href="@{../../winter/img/favicon.png}">
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" th:href="@{../../winter/css/bootstrap.min.css}">
   <!-- animate CSS -->
-  <link rel="stylesheet" href="css/animate.css">
+  <link rel="stylesheet" th:href="@{../../winter/css/animate.css}">
   <!-- owl carousel CSS -->
-  <link rel="stylesheet" href="css/owl.carousel.min.css">
+  <link rel="stylesheet" th:href="@{../../winter/css/owl.carousel.min.css}">
   <!-- font awesome CSS -->
-  <link rel="stylesheet" href="css/all.css">
-  <link rel="stylesheet" href="css/nice-select.css">
+  <link rel="stylesheet" th:href="@{../../winter/css/all.css}">
+  <link rel="stylesheet" th:href="@{../../winter/css/nice-select.css}">
   <!-- flaticon CSS -->
-  <link rel="stylesheet" href="css/flaticon.css">
-  <link rel="stylesheet" href="css/themify-icons.css">
+  <link rel="stylesheet" th:href="@{../../winter/css/flaticon.css}">
+  <link rel="stylesheet" th:href="@{../../winter/css/themify-icons.css}">
   <!-- font awesome CSS -->
-  <link rel="stylesheet" href="css/magnific-popup.css">
+  <link rel="stylesheet" th:href="@{../../winter/css/magnific-popup.css}">
   <!-- swiper CSS -->
-  <link rel="stylesheet" href="css/slick.css">
+  <link rel="stylesheet" th:href="@{../../winter/css/slick.css}">
   <!-- swiper CSS -->
-  <link rel="stylesheet" href="css/price_rangs.css">
+  <link rel="stylesheet" th:href="@{../../winter/css/price_rangs.css}">
   <!-- style CSS -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" th:href="@{../../winter/css/style.css}">
 </head>
 
 <body class="bg-white">
@@ -128,7 +128,7 @@
               <div class="col-lg-12">
                   <div class="breadcrumb_iner">
                       <div class="breadcrumb_iner_item">
-                          <p>Home / About</p>
+                          <p></p>
                       </div>
                   </div>
               </div>
@@ -151,16 +151,13 @@
             <h4>order info</h4>
             <ul>
               <li>
-                <p>order number</p><span>: 60235</span>
+                <p>order number</p><span th:text="${savedOrder.fakeid}"></span>
               </li>
               <li>
-                <p>data</p><span>: Oct 03, 2017</span>
+                <p>data</p><span th:text="${savedOrder.date}"></span>
               </li>
               <li>
-                <p>total</p><span>: USD 2210</span>
-              </li>
-              <li>
-                <p>mayment methord</p><span>: Check payments</span>
+                <p>total</p><span th:text="${savedOrder.totalprice}"></span>
               </li>
             </ul>
           </div>
@@ -170,16 +167,7 @@
             <h4>Billing Address</h4>
             <ul>
               <li>
-                <p>Street</p><span>: 56/8</span>
-              </li>
-              <li>
-                <p>city</p><span>: Los Angeles</span>
-              </li>
-              <li>
-                <p>country</p><span>: United States</span>
-              </li>
-              <li>
-                <p>postcode</p><span>: 36952</span>
+                <p>Adress</p><span th:text="${adress}"></span>
               </li>
             </ul>
           </div>
@@ -189,16 +177,7 @@
             <h4>shipping Address</h4>
             <ul>
               <li>
-                <p>Street</p><span>: 56/8</span>
-              </li>
-              <li>
-                <p>city</p><span>: Los Angeles</span>
-              </li>
-              <li>
-                <p>country</p><span>: United States</span>
-              </li>
-              <li>
-                <p>postcode</p><span>: 36952</span>
+                <p>Adress</p><span th:text="${adress}"></span>
               </li>
             </ul>
           </div>
@@ -218,18 +197,7 @@
               </thead>
               <tbody>
                 <tr>
-                  <th colspan="2"><span>Pixelstore fresh Blackberry</span></th>
-                  <th>x02</th>
-                  <th> <span>$720.00</span></th>
-                </tr>
-                <tr>
-                  <th colspan="2"><span>Pixelstore fresh Blackberry</span></th>
-                  <th>x02</th>
-                  <th> <span>$720.00</span></th>
-                </tr>
-                <tr>
-                  <th colspan="2"><span>Pixelstore fresh Blackberry</span></th>
-                  <th>x02</th>
+                  <th colspan="2"><span th:text="${}">Pixelstore fresh Blackberry</span></th>
                   <th> <span>$720.00</span></th>
                 </tr>
                 <tr>
@@ -362,33 +330,33 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
   <!-- jquery plugins here-->
   <!-- jquery -->
-  <script src="js/jquery-1.12.1.min.js"></script>
+  <script src="../../winter/js/jquery-1.12.1.min.js"></script>
   <!-- popper js -->
-  <script src="js/popper.min.js"></script>
+  <script src="../../winter/js/popper.min.js"></script>
   <!-- bootstrap js -->
-  <script src="js/bootstrap.min.js"></script>
+  <script src="../../winter/js/bootstrap.min.js"></script>
   <!-- easing js -->
-  <script src="js/jquery.magnific-popup.js"></script>
+  <script src="../../winter/js/jquery.magnific-popup.js"></script>
   <!-- swiper js -->
-  <script src="js/swiper.min.js"></script>
+  <script src="../../winter/js/swiper.min.js"></script>
   <!-- swiper js -->
   
   <!-- particles js -->
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/jquery.nice-select.min.js"></script>
+  <script src="../../winter/js/owl.carousel.min.js"></script>
+  <script src="../../winter/js/jquery.nice-select.min.js"></script>
   <!-- slick js -->
-  <script src="js/slick.min.js"></script>
-  <script src="js/jquery.counterup.min.js"></script>
-  <script src="js/waypoints.min.js"></script>
-  <script src="js/contact.js"></script>
-  <script src="js/jquery.ajaxchimp.min.js"></script>
-  <script src="js/jquery.form.js"></script>
-  <script src="js/jquery.validate.min.js"></script>
-  <script src="js/mail-script.js"></script>
-  <script src="js/stellar.js"></script>
-  <script src="js/price_rangs.js"></script>
+  <script src="../../winter/js/slick.min.js"></script>
+  <script src="../../winter/js/jquery.counterup.min.js"></script>
+  <script src="../../winter/js/waypoints.min.js"></script>
+  <script src="../../winter/js/contact.js"></script>
+  <script src="../../winter/js/jquery.ajaxchimp.min.js"></script>
+  <script src="../../winter/js/jquery.form.js"></script>
+  <script src="../../winter/js/jquery.validate.min.js"></script>
+  <script src="../../winter/js/mail-script.js"></script>
+  <script src="../../winter/js/stellar.js"></script>
+  <script src="../../winter/js/price_rangs.js"></script>
   <!-- custom js -->
-  <script src="js/custom.js"></script>
+  <script src="../../winter/js/custom.js"></script>
 </body>
 
 </html>

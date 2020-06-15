@@ -17,6 +17,15 @@ public class Order {
 	private String username;
 	private boolean cargoStatus;
 	private LocalDate date;
+	private Double totalprice = 0.00;
+
+	public Double getTotalprice() {
+		return totalprice;
+	}
+
+	public void setTotalprice(Double totalprice) {
+		this.totalprice = totalprice;
+	}
 
 	public boolean isCargoStatus() {
 		return cargoStatus;

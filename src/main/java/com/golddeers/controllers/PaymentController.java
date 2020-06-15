@@ -55,11 +55,12 @@ public class PaymentController {
 		HashMap<String, String> methods = new HashMap();
 		methods.put("PayPal", "https://www.paypal.com/");
 		methods.put("Yapıkredi", "https://www.yapikredi.com.tr/");
-		methods.put("Cash", "");
+		methods.put("Cash", "#");
 
 		if (Session.online.containsValue("registered")) {
 			model.addAttribute("registered", true);
 			model.addAttribute("paymentMethods", methods);
+			model.addAttribute("username", Session.online.keySet().toArray()[0]);
 			return "/payment/methods";
 		}
 		return "winter/index";

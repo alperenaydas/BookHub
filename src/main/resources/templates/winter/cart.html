@@ -207,19 +207,21 @@
                             }
                         }
                         document.getElementById('total').innerHTML += '<tr><td></td><td>' +sum_total + '</td><td>total</td></tr>';
-
-
-
-
                     })
                     </script>
                 </table>
             </div>
-          <div class="checkout_btn_inner float-right">
-            <a class="btn_1" th:href="${'/home'}">Continue Shopping</a>
-            <a class="btn_1 checkout_btn_1" href="/paymentmethods">Select Payment Method</a>
-          </div>
+            <div th:if="${not #lists.isEmpty(booksincart)}">
+	            <div class="checkout_btn_inner float-right">
+		            <a class="btn_1" th:href="${'/home'}">Continue Shopping</a>
+		            <a class="btn_1 checkout_btn_1" href="/paymentmethods">Select Payment Method</a>
+          		</div>
+            </div>
         </div>
+        <div th:if="${#lists.isEmpty(booksincart)}">
+	    	<br></br>
+			<h2>No Books Found...</h2>
+    	</div>
       </div>
   </section>
   <!--================End Cart Area =================-->

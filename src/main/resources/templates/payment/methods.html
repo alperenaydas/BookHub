@@ -27,6 +27,37 @@
 </head>
 
 <body class="bg-white">
+
+  <!-- jquery plugins here-->
+  <!-- jquery -->
+  <script src="../../winter/js/jquery-1.12.1.min.js"></script>
+  <!-- popper js -->
+  <script src="../../winter/js/popper.min.js"></script>
+  <!-- bootstrap js -->
+  <script src="../../winter/js/bootstrap.min.js"></script>
+  <!-- easing js -->
+  <script src="../../winter/js/jquery.magnific-popup.js"></script>
+  <!-- swiper js -->
+  <script src="../../winter/js/swiper.min.js"></script>
+  <!-- swiper js -->
+  
+  <!-- particles js -->
+  <script src="../../winter/js/owl.carousel.min.js"></script>
+  <script src="../../winter/js/jquery.nice-select.min.js"></script>
+  <!-- slick js -->
+  <script src="../../winter/js/slick.min.js"></script>
+  <script src="../../winter/js/jquery.counterup.min.js"></script>
+  <script src="../../winter/js/waypoints.min.js"></script>
+  <script src="../../winter/js/contact.js"></script>
+  <script src="../../winter/js/jquery.ajaxchimp.min.js"></script>
+  <script src="../../winter/js/jquery.form.js"></script>
+  <script src="../../winter/js/jquery.validate.min.js"></script>
+  <script src="../../winter/js/mail-script.js"></script>
+  <script src="../../winter/js/stellar.js"></script>
+  <script src="../../winter/js/price_rangs.js"></script>
+  <!-- custom js -->
+  <script src="../../winter/js/custom.js"></script>
+  
   <!--::header part start::-->
     <header class="main_menu home_menu">
         <div class="container-fluid">
@@ -138,7 +169,7 @@
         <div class="col-lg-12">
           <div class="order_details_iner">
             <h2>Select Payment Method</h2>
-            <table class="table table-borderless">
+            <table class="table table-borderless" id="xx">
               <thead>
                 <tr>
                   <th scope="col"></th>
@@ -146,8 +177,23 @@
               </thead>
               <tbody>
               <tr th:each="method : ${paymentMethods}">              
-				<td><a style="width: 180px; height: 40px;"class="genric-btn info radius" th:text="${method.key}" target="_blank" th:href="${method.value}"></a> </td>                
+				<td><a style="width: 180px; height: 40px;"class="genric-btn info radius somethinh" th:text="${method.key}" target="_blank" th:href="${method.value}" rel="nofollow"></a> </td>
               </tr>
+              <a class="wtf" th:text=${username}></a>
+              <script th:inline="javascript">
+	              	$("a.somethinh").on("click", function() {
+	            	  var share_link = $(this).prop('href');
+	            	  var popup = window.open(share_link, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400");
+	            	  var username = [[${username}]];
+	            	  var timer = setInterval(function() { 
+	            		    if(popup.closed) {
+	            		        clearInterval(timer);
+	            		        alert('Payment Succesful!');
+	            		        window.location.href = "http://localhost:8080/successful/" + username;
+	            		    }
+	            		}, 1000);
+	            	});
+              </script>
               </tbody>
             </table>
           </div>
@@ -163,35 +209,6 @@
 
 <!--::footer_part end::-->
 
-  <!-- jquery plugins here-->
-  <!-- jquery -->
-  <script src="../../winter/js/jquery-1.12.1.min.js"></script>
-  <!-- popper js -->
-  <script src="../../winter/js/popper.min.js"></script>
-  <!-- bootstrap js -->
-  <script src="../../winter/js/bootstrap.min.js"></script>
-  <!-- easing js -->
-  <script src="../../winter/js/jquery.magnific-popup.js"></script>
-  <!-- swiper js -->
-  <script src="../../winter/js/swiper.min.js"></script>
-  <!-- swiper js -->
-  
-  <!-- particles js -->
-  <script src="../../winter/js/owl.carousel.min.js"></script>
-  <script src="../../winter/js/jquery.nice-select.min.js"></script>
-  <!-- slick js -->
-  <script src="../../winter/js/slick.min.js"></script>
-  <script src="../../winter/js/jquery.counterup.min.js"></script>
-  <script src="../../winter/js/waypoints.min.js"></script>
-  <script src="../../winter/js/contact.js"></script>
-  <script src="../../winter/js/jquery.ajaxchimp.min.js"></script>
-  <script src="../../winter/js/jquery.form.js"></script>
-  <script src="../../winter/js/jquery.validate.min.js"></script>
-  <script src="../../winter/js/mail-script.js"></script>
-  <script src="../../winter/js/stellar.js"></script>
-  <script src="../../winter/js/price_rangs.js"></script>
-  <!-- custom js -->
-  <script src="../../winter/js/custom.js"></script>
 </body>
 
 </html>

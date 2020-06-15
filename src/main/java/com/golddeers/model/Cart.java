@@ -13,6 +13,15 @@ public class Cart {
 	private Long bookid;
 	private String username;
 	private Double totalprice = 0.00;
+	private boolean sold = false;
+
+	public boolean isSold() {
+		return sold;
+	}
+
+	public void setSold(boolean sold) {
+		this.sold = sold;
+	}
 
 	public Double getTotalprice() {
 		return totalprice;

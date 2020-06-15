@@ -60,7 +60,9 @@ public class CartController {
 			model.addAttribute("carts", cartService.findByUsernameContaining(Session.online.keySet().toArray()[0]));
 			List<Book> booksincart = new ArrayList<>();
 			for (Cart cart : cartService.findByUsernameContaining(Session.online.keySet().toArray()[0])) {
-				booksincart.add(bookService.getById(cart.getBookid()));
+				if (!cart.isSold()) {
+					booksincart.add(bookService.getById(cart.getBookid()));
+				}
 			}
 
 			model.addAttribute("booksincart", booksincart);

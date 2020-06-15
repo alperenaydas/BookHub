@@ -1,6 +1,7 @@
 package com.golddeers.controllers;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,10 +9,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.golddeers.model.Cart;
 import com.golddeers.model.Order;
 import com.golddeers.repositories.OrderRepository;
+import com.golddeers.services.BookService;
 import com.golddeers.services.CartService;
 import com.golddeers.services.OrderService;
+import com.golddeers.services.UserService;
 
 @Controller
 public class OrderController {
@@ -19,6 +23,8 @@ public class OrderController {
 	private OrderRepository orderRepository;
 	private CartService cartService;
 	private OrderService orderService;
+	private BookService bookService;
+	private UserService userService;
 
 	@Autowired
 	public void setOrderService(OrderService orderService) {
@@ -26,19 +32,40 @@ public class OrderController {
 	}
 
 	@Autowired
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	@Autowired
 	public void setCartService(CartService cartService) {
 		this.cartService = cartService;
 	}
 
-	@RequestMapping("/addCartToOrder/{username}")
+	@Autowired
+	public void setBookService(BookService bookService) {
+		this.bookService = bookService;
+	}
+
+	@RequestMapping("/successful/{username}")
 	public String addBookToCart(@PathVariable String username, Model model) {
 		model.addAttribute("cart", cartService.findByUsernameContaining(username));
 		String user = (String) Session.online.keySet().toArray()[0];
-		System.out.println(username);
-		System.out.println(user);
-		orderService.saveOrUpdate(new Order(username, false, LocalDate.now()));
-
-		return "winter/index";
+		List<Cart> carts = cartService.findByUsernameContaining(username);
+		Order savedOrder = orderService.saveOrUpdate(new Order(username, false, LocalDate.now()));
+		for (Cart carty : carts) {
+			if (carty.getUsername().equals(username) && !carty.isSold()) {
+				carty.setSold(true);
+				cartService.saveOrUpdate(carty);
+				savedOrder.setTotalprice(savedOrder.getTotalprice().doubleValue() + bookService.getById(carty.getBookid()).getPrice().doubleValue());
+			}
+		}
+		if(savedOrder.getTotalprice() == 0.0) {
+			orderService.delete(savedOrder.getFakeid());
+			return "winter/index";
+		}
+		model.addAttribute("savedOrder", savedOrder);
+		model.addAttribute("adress", userService.getByUsername(username).getAddress());
+		return "winter/confirmation";
 
 		// System.out.println(id);
 
