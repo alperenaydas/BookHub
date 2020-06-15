@@ -68,6 +68,12 @@ public class UserController {
 	public String myCart() {
 		return "winter/cart";
 	}
+	@RequestMapping(value = "/ads")
+	public String showads(Model model) {
+		model.addAttribute("background", 1);
+		
+		return "winter/index";
+	}
 	
 	@RequestMapping(value = "/edituser")
 	public String mySettings(Model model) {
