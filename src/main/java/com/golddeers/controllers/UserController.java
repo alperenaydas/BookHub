@@ -38,10 +38,22 @@ public class UserController {
 		this.userService = userService;
 	}
 
+	@RequestMapping(value = "/ads")
+	public String showads(Model model) {
+		model.addAttribute("background", 1);
+		
+		return "winter/index";
+	}
+
 	@RequestMapping("/login")
 	public String loginReq(Model model) {
 		if (!Session.online.isEmpty()) {
+			String username = (String) Session.online.keySet().toArray()[0];
+
 			if (Session.online.containsValue("admin")) {
+				model.addAttribute("admin", true);
+				model.addAttribute("usersOnline", Session.online);
+				model.addAttribute("username", username);
 				return "/admin/panel";
 			}
 			return "winter/index";
@@ -68,21 +80,15 @@ public class UserController {
 	public String myCart() {
 		return "winter/cart";
 	}
-	@RequestMapping(value = "/ads")
-	public String showads(Model model) {
-		model.addAttribute("background", 1);
-		
-		return "winter/index";
-	}
-	
+
 	@RequestMapping(value = "/edituser")
 	public String mySettings(Model model) {
 		String username = (String) Session.online.keySet().toArray()[0];
-		
+
 		User user = userService.getById(username);
 		UserForm userForm = userToUserForm.convert(user);
-		
-		model.addAttribute("userForm",userForm);
+
+		model.addAttribute("userForm", userForm);
 		return "users/user-edit-user";
 	}
 
@@ -212,6 +218,10 @@ public class UserController {
 				Session.login(username, userType);
 				System.out.println("login success");
 				if (Role.Admin == Role.getByName(userFetched.getUserType())) {
+					model.addAttribute("admin", true);
+					model.addAttribute("user_type", userFetched.getUserType());
+					model.addAttribute("usersOnline", Session.online);
+					model.addAttribute("username", username);
 					return "/admin/panel";
 
 				} else if (Role.Registered == Role.getByName(userFetched.getUserType())) {
