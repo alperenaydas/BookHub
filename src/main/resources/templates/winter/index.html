@@ -23,7 +23,14 @@
     <!-- swiper CSS -->
     <link rel="stylesheet" th:href="@{../../winter/css/slick.css}">
     <!-- style CSS -->
+    <div th:if="${background} == 1">
+    <link rel="stylesheet" th:href="@{../../winter/css/style2.css}">
+    </div>
+    <div th:if="${background} != 1">
     <link rel="stylesheet" th:href="@{../../winter/css/style.css}">
+    </div>
+    
+    
 </head>
 
 <body>
@@ -140,9 +147,9 @@
                         <div class="single_banner_slider">
                             <div class="banner_text">
                                 <div class="banner_text_iner">
-                                    <h5>This Summer in BookHub</h5>
-                                    <h1>It is more than a book</h1>
-                                    <a href="#" class="btn_1">shop now</a>
+                                    <h5></h5>
+                                    <h1 th:text="${background}"></h1>
+                                   
                                 </div>
                             </div>
                         </div>
