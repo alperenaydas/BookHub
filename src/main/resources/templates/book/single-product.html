@@ -138,6 +138,10 @@
               </div>
             </div>
           </div>
+          <div th:switch="${admin}"><br>
+			  <a th:case="${true}" class="btn btn-warning" href="/login">Go Back</a>
+			  <a th:case="*" class="btn btn-warning" href="javascript:history.back()">Go Back</a>
+          </div>
         </div>
         <div class="col-lg-5 offset-lg-1">
           <div class="s_product_text">
@@ -183,11 +187,8 @@
                 <span class="number-increment"> <i class="ti-plus"></i></span>
               </div>
             <div class="add_to_cart">
-            <div th:switch="${admin}"><br>
-		      <a style="display: inline;" th:case="${true}" class="btn btn-warning" href="/login">Go Back</a>
-			  <a style="display: inline;" th:case="*" class="btn btn-warning" href="javascript:history.back()">Go Back</a>
-			  <a class ="btn btn-info" th:href="${'/addBookToCart/' + book.id}">Add to Cart</a>
-  	        </div>
+                <td><a class ="btn btn-info" th:href="${'/book/details/' + book.id}">View</a> </td>
+                <a class ="btn btn-info" th:href="${'/addBookToCart/' + book.id}">Add to Cart</a>
           	</div>
         </div>
       </div>

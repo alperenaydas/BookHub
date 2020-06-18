@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.golddeers.model.Book;
 import com.golddeers.model.Cart;
 import com.golddeers.model.Order;
 import com.golddeers.repositories.OrderRepository;
@@ -22,16 +21,10 @@ import com.golddeers.services.UserService;
 public class OrderController {
 
 	private OrderRepository orderRepository;
-
 	private CartService cartService;
 	private OrderService orderService;
 	private BookService bookService;
 	private UserService userService;
-
-	@Autowired
-	public void setOrderRepository(OrderRepository orderRepository) {
-		this.orderRepository = orderRepository;
-	}
 
 	@Autowired
 	public void setOrderService(OrderService orderService) {
@@ -53,47 +46,17 @@ public class OrderController {
 		this.bookService = bookService;
 	}
 
-	@RequestMapping("/myorders")
-	public String showMyOrders(Model model) {
-		String username = (String) Session.online.keySet().toArray()[0];
-		List<Order> orders = orderRepository.findByUsernameIgnoreCaseContaining(username);
-		model.addAttribute("orders", orders);
-		model.addAttribute("username", username);
-		return "winter/myorders";
-	}
-
-	@RequestMapping("/orderDetails/{id}")
-	public String showMyOrders(@PathVariable String id, Model model) {
-		String username = (String) Session.online.keySet().toArray()[0];
-		List<Order> orders = orderRepository.findByUsernameIgnoreCaseContaining(username);
-		Order order = null;
-		System.out.println(id);
-		for (Order ordery : orders) {
-			if (ordery.getFakeid().equals(Long.valueOf(id))) {
-				order = ordery;
-			}
-		}
-		model.addAttribute("order", order);
-		model.addAttribute("username", username);
-		model.addAttribute("address",
-				userService.getByUsername((String) Session.online.keySet().toArray()[0]).getAddress());
-		return "winter/orderdetails";
-	}
-
 	@RequestMapping("/successful/{username}")
 	public String addBookToCart(@PathVariable String username, Model model) {
 		model.addAttribute("cart", cartService.findByUsernameContaining(username));
+
 		String user = (String) Session.online.keySet().toArray()[0];
 		List<Cart> carts = cartService.findByUsernameContaining(username);
 		Order savedOrder = orderService.saveOrUpdate(new Order(username, false, LocalDate.now()));
+
 		for (Cart carty : carts) {
 			if (carty.getUsername().equals(username) && !carty.isSold()) {
 				carty.setSold(true);
-				Book book;
-				bookService.getById(carty.getBookid())
-						.setNumberInStock(bookService.getById(carty.getBookid()).getNumberInStock() - 1);
-				book = bookService.getById(carty.getBookid());
-				bookService.saveOrUpdate(book);
 				cartService.saveOrUpdate(carty);
 				savedOrder.setTotalprice(savedOrder.getTotalprice().doubleValue()
 						+ bookService.getById(carty.getBookid()).getPrice().doubleValue());
@@ -106,7 +69,6 @@ public class OrderController {
 		}
 
 		model.addAttribute("savedOrder", savedOrder);
-		orderService.saveOrUpdate(savedOrder);
 		model.addAttribute("adress", userService.getByUsername(username).getAddress());
 
 		if (Session.online.isEmpty() == false) {

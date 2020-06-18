@@ -139,7 +139,7 @@
                     <div class="login_part_form">
                         <div class="login_part_form_iner">
                             <h3> Please enter the corresponding fields.</h3>
-                            <form class="row contact_form"  th:object="${userForm}" th:action="@{/user}" method="post">
+                            <form class="row contact_form"  th:object="${userForm}" th:action="@{/useredit}" method="post">
 								<div class="col-md-12 form-group p_star" th:if="${usernameError}">
 									<p style="text-align:center;font-family:arial;background-color:rgb(247, 47, 47);color:white;">Username taken before.</p>
 								</div>
@@ -166,9 +166,6 @@
 								</div>
                                 <div class="col-md-12 form-group p_star">
                                     <input type="password" class="form-control" th:field="*{password}" placeholder="Password">
-                                </div>
-                                 <div class="col-md-12 form-group p_star">
-                                    <input type="password" class="form-control" th:field="*{confirmPassword}" placeholder="Confirm Password">
                                 </div>
                                 
 								<div class="col-md-12 form-group p_star" th:if="${emailError}">
