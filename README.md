@@ -13,8 +13,6 @@ For Communication and Progress: Zoom, Discord and GitHub.
 
 Configuration Management Tool, Version Control System: GitHub
 
-For Documentation: Google Docs
-
 As Server: Localhost on Linux and Windows
 
 Programming Environment: Eclipse, IntelliJ
